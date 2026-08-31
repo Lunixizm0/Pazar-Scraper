@@ -4,11 +4,23 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "bs4>=0.0.2",
+    "lxml>=6.1.2",
+    "requests>=2.34.2",
+]
 
 [project.scripts]
 scrape = "scrape:main"
 
+[tool.ruff]
+ignore = ["F401"]
+
 [build-system]
 requires = ["uv_build>=0.12.7,<0.13.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
