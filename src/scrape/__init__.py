@@ -1,5 +1,4 @@
-from .main import main as start
-
-
 def main() -> None:
-    start()
+    from .main import main as _main
+
+    _main()
