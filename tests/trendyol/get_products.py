@@ -106,6 +106,8 @@ if __name__ == "__main__":
         print(f"Found {len(product_ids)} product IDs:")
         for pid in product_ids:
             print(f"  - {pid}")
-            print(f"    API: https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/component-read/component/{pid}")
+            print(
+                f"    API: https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/component-read/component/{pid}"
+            )
     else:
         print("No product IDs found")

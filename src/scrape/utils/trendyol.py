@@ -24,6 +24,7 @@ def get_raw_html(url):
     response = requests.get(url, headers=headers, timeout=20)
     return response
 
+
 def _is_placeholder_description_text(value):
     if value is None:
         return True
@@ -33,7 +34,16 @@ def _is_placeholder_description_text(value):
         return True
 
     normalized = "".join(ch for ch in cleaned if ch.isalnum()).upper()
-    if normalized in {"STD", "NAA", "NA", "NONE", "NULL", "UNKNOWN", "UNDEFINED", "N/A"}:
+    if normalized in {
+        "STD",
+        "NAA",
+        "NA",
+        "NONE",
+        "NULL",
+        "UNKNOWN",
+        "UNDEFINED",
+        "N/A",
+    }:
         return True
 
     return len(normalized) <= 3 and normalized.isalpha()
@@ -83,8 +93,10 @@ def get_product_descriptions_from_api(product_id):
         print(f"Error fetching product descriptions from API: {e}")
         return None
 
+
 def parse_html(html_content):
     return BeautifulSoup(html_content, "html.parser")
+
 
 def _iter_json_ld_payloads(soup):
     for script in soup.select("script[type='application/ld+json']"):
@@ -93,10 +105,11 @@ def _iter_json_ld_payloads(soup):
             continue
         try:
             payload = json.loads(script_text)
-        except (TypeError, json.JSONDecodeError):
+        except TypeError, json.JSONDecodeError:
             continue
 
         yield payload
+
 
 def extract_product_data(soup):
     for payload in _iter_json_ld_payloads(soup):
@@ -118,7 +131,7 @@ def _format_price_value(value):
         return None
     try:
         return f"{float(value):.2f} TL"
-    except (TypeError, ValueError):
+    except TypeError, ValueError:
         return None
 
 
@@ -164,6 +177,7 @@ def _str(value: Any) -> str | None:
         return normalized
     return str(normalized)
 
+
 def _extract_first_string(value):
     if value is None:
         return None
@@ -199,13 +213,14 @@ def _detect_category_from_product_data(product_data):
 
     return "unknown"
 
+
 def _extract_shared_props(soup):
     if not isinstance(soup, BeautifulSoup):
         return None
 
     for script in soup.select("script"):
         text = script.string or ""
-        if '__envoy__SHARED_PROPS' not in text:
+        if "__envoy__SHARED_PROPS" not in text:
             continue
 
         marker = 'window["__envoy__SHARED_PROPS"]='
@@ -242,7 +257,7 @@ def _extract_shared_props(soup):
 
         try:
             payload = json.loads(text[brace : i + 1])
-        except (TypeError, ValueError, json.JSONDecodeError):
+        except TypeError, ValueError, json.JSONDecodeError:
             continue
         if isinstance(payload, dict):
             return payload
@@ -269,7 +284,9 @@ def _extract_reviews_custom(product_data, shared_props):
         review_data = {}
         if aggregate_rating.get("ratingValue") is not None:
             review_data["score"] = aggregate_rating["ratingValue"]
-        count = aggregate_rating.get("reviewCount") or aggregate_rating.get("ratingCount")
+        count = aggregate_rating.get("reviewCount") or aggregate_rating.get(
+            "ratingCount"
+        )
         if count is not None:
             review_data["count"] = count
         if review_data:
@@ -318,7 +335,9 @@ def _extract_listings_custom(shared_props):
         entry = _extract_listing_entry(
             {
                 "name": merchant.get("name"),
-                "variants": [merchant_listing.get("winnerVariant")] if merchant_listing.get("winnerVariant") else None,
+                "variants": [merchant_listing.get("winnerVariant")]
+                if merchant_listing.get("winnerVariant")
+                else None,
             }
         )
         if entry:
@@ -343,7 +362,9 @@ def _find_category_path_in_shared_props(node, depth=0):
         for key in ("categoryTree", "webCategoryTree"):
             cand = node.get(key)
             if isinstance(cand, list):
-                path = [c.get("name") for c in cand if isinstance(c, dict) and c.get("name")]
+                path = [
+                    c.get("name") for c in cand if isinstance(c, dict) and c.get("name")
+                ]
                 if path:
                     return path
         for value in node.values():
@@ -375,7 +396,9 @@ def _detect_custom_data(product_data, shared_props=None):
             if not isinstance(entry, dict):
                 continue
             name = _extract_first_string(entry.get("name"))
-            value = _extract_first_string(entry.get("value")) or _extract_first_string(entry.get("unitText"))
+            value = _extract_first_string(entry.get("value")) or _extract_first_string(
+                entry.get("unitText")
+            )
             if not name or not value:
                 continue
             lowered = name.lower()
@@ -400,7 +423,11 @@ def _detect_custom_data(product_data, shared_props=None):
     if isinstance(shared_props, dict):
         path = _find_category_path_in_shared_props(shared_props)
         if not path:
-            category = shared_props.get("category") if isinstance(shared_props.get("category"), dict) else None
+            category = (
+                shared_props.get("category")
+                if isinstance(shared_props.get("category"), dict)
+                else None
+            )
             if category:
                 hierarchy = category.get("hierarchy")
                 if hierarchy:
@@ -409,6 +436,7 @@ def _detect_custom_data(product_data, shared_props=None):
             custom["category_path"] = path
 
     return custom
+
 
 def _extract_attributes_dict(product_data):
     attributes = {}
@@ -425,12 +453,15 @@ def _extract_attributes_dict(product_data):
                 value = _extract_first_string(item.get("value"))
             elif isinstance(item, dict):
                 key = _extract_first_string(item.get("name"))
-                value = _extract_first_string(item.get("value")) or _extract_first_string(item.get("unitText"))
+                value = _extract_first_string(
+                    item.get("value")
+                ) or _extract_first_string(item.get("unitText"))
             else:
                 continue
             if key and value:
                 attributes[key] = value
     return attributes
+
 
 _BOILERPLATE_MARKERS = (
     "tarafından gönderilecektir",
@@ -550,7 +581,9 @@ def _extract_image(product_data):
     return None
 
 
-def build_product_dataset(product_data, category="unknown", custom_data=None, soup=None):
+def build_product_dataset(
+    product_data, category="unknown", custom_data=None, soup=None
+):
     if not isinstance(product_data, dict):
         return None
 
@@ -565,7 +598,11 @@ def build_product_dataset(product_data, category="unknown", custom_data=None, so
     else:
         brand_name = product_data.get("manufacturer")
 
-    detected_category = category if category and category != "unknown" else _detect_category_from_product_data(product_data)
+    detected_category = (
+        category
+        if category and category != "unknown"
+        else _detect_category_from_product_data(product_data)
+    )
     merged_custom_data = _detect_custom_data(product_data, shared_props=shared_props)
     if isinstance(custom_data, dict):
         merged_custom_data.update(custom_data)
@@ -589,7 +626,9 @@ def build_product_dataset(product_data, category="unknown", custom_data=None, so
 
 def extract_product_dataset(soup, category="unknown", custom_data=None):
     product_data = extract_product_data(soup)
-    return build_product_dataset(product_data, category=category, custom_data=custom_data, soup=soup)
+    return build_product_dataset(
+        product_data, category=category, custom_data=custom_data, soup=soup
+    )
 
 
 def product_dataset_to_json(dataset):
@@ -609,8 +648,19 @@ if __name__ == "__main__":
         payload = dataset.to_dict() if isinstance(dataset, ProductDataset) else dataset
         print(json.dumps(payload, ensure_ascii=False, indent=2))
     elif response.status_code == 404:
-        print(json.dumps({"status": 404, "message": "Product not found"}, ensure_ascii=False))
+        print(
+            json.dumps(
+                {"status": 404, "message": "Product not found"}, ensure_ascii=False
+            )
+        )
     elif response.status_code == 403:
-        print(json.dumps({"status": 403, "message": "Access denied"}, ensure_ascii=False))
+        print(
+            json.dumps({"status": 403, "message": "Access denied"}, ensure_ascii=False)
+        )
     else:
-        print(json.dumps({"status": response.status_code, "message": "Unexpected status"}, ensure_ascii=False))
+        print(
+            json.dumps(
+                {"status": response.status_code, "message": "Unexpected status"},
+                ensure_ascii=False,
+            )
+        )

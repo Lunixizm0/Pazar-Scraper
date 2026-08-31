@@ -35,7 +35,9 @@ def get_full_product_urls_from_homepage(limit=5):
             "Connection": "keep-alive",
             "Upgrade-Insecure-Requests": "1",
         }
-        response = requests.get("https://www.hepsiburada.com", headers=headers, timeout=30)
+        response = requests.get(
+            "https://www.hepsiburada.com", headers=headers, timeout=30
+        )
         if response.status_code != 200:
             return []
 

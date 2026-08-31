@@ -74,7 +74,7 @@ uv run scrape "https://www.hepsiburada.com/product-p-id"
         "merchant": "Trendyol",
         "price": 4458.22,
         "original_price": 4458.22
-      } // And others
+      } And others
     ],
     "merchant": "VATAN BİLGİSAYAR",
     "category_path": [

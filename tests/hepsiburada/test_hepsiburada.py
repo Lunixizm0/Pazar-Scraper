@@ -25,7 +25,9 @@ def pytest_generate_tests(metafunc):
 
 def test_extracts_product_from_live_hepsiburada_product(url):
     response = get_raw_html(url)
-    assert response.status_code == 200, f"Request failed for {url}: {response.status_code}"
+    assert response.status_code == 200, (
+        f"Request failed for {url}: {response.status_code}"
+    )
 
     soup = parse_html(response.content)
     product_data = extract_product_data(soup)
@@ -39,8 +41,12 @@ def test_extracts_product_from_live_hepsiburada_product(url):
     assert dataset["brand"] is not None, f"No brand on {url}"
     assert dataset["sku"] is not None, f"No sku on {url}"
     assert dataset["price"] is not None, f"No price on {url}"
-    assert re.search(r"\d[\d.,]*\s*TL", dataset["price"]), f"Unexpected price format on {url}: {dataset['price']}"
-    assert dataset["currency"] == "TRY", f"Unexpected currency on {url}: {dataset['currency']}"
+    assert re.search(r"\d[\d.,]*\s*TL", dataset["price"]), (
+        f"Unexpected price format on {url}: {dataset['price']}"
+    )
+    assert dataset["currency"] == "TRY", (
+        f"Unexpected currency on {url}: {dataset['currency']}"
+    )
     assert dataset["category"] not in (None, "unknown"), f"No category on {url}"
     assert dataset["availability"] is not None, f"No availability on {url}"
 
@@ -55,7 +61,9 @@ def test_extracts_product_from_live_hepsiburada_product(url):
 
 def test_live_hepsiburada_product_has_reviews_and_listings(url):
     response = get_raw_html(url)
-    assert response.status_code == 200, f"Request failed for {url}: {response.status_code}"
+    assert response.status_code == 200, (
+        f"Request failed for {url}: {response.status_code}"
+    )
 
     soup = parse_html(response.content)
     dataset = extract_product_dataset(soup)

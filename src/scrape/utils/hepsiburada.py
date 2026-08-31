@@ -24,9 +24,11 @@ def get_raw_html(url):
         "Sec-Fetch-Dest": "document",
         "Sec-Fetch-Mode": "navigate",
         "Sec-Fetch-Site": "none",
-        "Sec-Fetch-User": "?1",}
+        "Sec-Fetch-User": "?1",
+    }
     response = requests.get(url, headers=headers, timeout=20)
     return response
+
 
 def _iter_json_ld_payloads(soup):
     for script in soup.select("script[type='application/ld+json']"):
@@ -35,9 +37,10 @@ def _iter_json_ld_payloads(soup):
             continue
         try:
             payload = json.loads(script_text)
-        except (TypeError, json.JSONDecodeError):
+        except TypeError, json.JSONDecodeError:
             continue
         yield payload
+
 
 def _extract_product_from_json_ld(payload):
     if not isinstance(payload, dict):
@@ -54,6 +57,7 @@ def _extract_product_from_json_ld(payload):
 
     return None
 
+
 def extract_product_data(soup):
     if isinstance(soup, dict):
         return soup
@@ -62,6 +66,7 @@ def extract_product_data(soup):
         if product is not None:
             return product
     return None
+
 
 def _extract_redux_store(soup):
     if not isinstance(soup, BeautifulSoup):
@@ -78,8 +83,9 @@ def _extract_redux_store(soup):
         return None
     try:
         return json.loads(text[start : end + 1])
-    except (TypeError, ValueError):
+    except TypeError, ValueError:
         return None
+
 
 def _extract_description_from_dom(soup):
     if not isinstance(soup, BeautifulSoup):
@@ -110,23 +116,45 @@ def _extract_description_from_dom(soup):
 
     return best
 
+
 def _clean_description_text(value):
     if not value:
         return None
     cleaned = " ".join(str(value).split())
     return cleaned or None
 
+
 def _strip_placeholder_tokens(text):
     import re
+
     cleaned = " ".join(str(text).split())
-    cleaned = re.sub(r"\s+(?:STD|N/?A|NONE|NA|NUL)\s*$", "", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(
+        r"\s+(?:STD|N/?A|NONE|NA|NUL)\s*$", "", cleaned, flags=re.IGNORECASE
+    )
     return cleaned.strip()
 
+
 _META_FIELDS = {
-    "name", "url", "image", "offers", "brand", "description", "category",
-    "@id", "@type", "@context", "aggregateRating", "review",
-    "hasMerchantReturnPolicy", "merchantReturnPolicy", "shippingDetails",
-    "mainEntityOfPage", "potentialAction", "additionalType",}
+    "name",
+    "url",
+    "image",
+    "offers",
+    "brand",
+    "description",
+    "category",
+    "@id",
+    "@type",
+    "@context",
+    "aggregateRating",
+    "review",
+    "hasMerchantReturnPolicy",
+    "merchantReturnPolicy",
+    "shippingDetails",
+    "mainEntityOfPage",
+    "potentialAction",
+    "additionalType",
+}
+
 
 def _extract_attribute_fallback_description(product_data):
     if not isinstance(product_data, dict):
@@ -154,21 +182,26 @@ def _extract_attribute_fallback_description(product_data):
         return f"{heading} {'. '.join(snippets)}.".strip()
     return None
 
+
 def _build_description(soup, product_data):
     parts = []
     dom_description = _extract_description_from_dom(soup)
-    dom_description = _strip_placeholder_tokens(dom_description) if dom_description else None
+    dom_description = (
+        _strip_placeholder_tokens(dom_description) if dom_description else None
+    )
 
     name = _extract_first_string(product_data.get("name")) or ""
     if dom_description:
         rest = dom_description
         if name and rest.lower().startswith(name.lower()):
-            rest = rest[len(name):].strip()
+            rest = rest[len(name) :].strip()
         if rest and len(rest) > 10:
             parts.append(dom_description)
 
     json_ld_description = _extract_first_string(product_data.get("description"))
-    if json_ld_description and not _is_placeholder_description_text(json_ld_description):
+    if json_ld_description and not _is_placeholder_description_text(
+        json_ld_description
+    ):
         if _is_generic_hepsiburada_description(json_ld_description):
             if not dom_description:
                 parts.append(json_ld_description)
@@ -181,6 +214,7 @@ def _build_description(soup, product_data):
             return fallback
         return None
     return " ".join(parts)
+
 
 def _is_generic_hepsiburada_description(value):
     if not value:
@@ -195,6 +229,7 @@ def _is_generic_hepsiburada_description(value):
     )
     return any(marker in normalized for marker in markers)
 
+
 def _extract_redux_product(redux):
     if not isinstance(redux, dict):
         return None
@@ -206,6 +241,7 @@ def _extract_redux_product(redux):
         return None
     return product
 
+
 def _extract_image(product_data):
     image = product_data.get("image")
     if isinstance(image, list):
@@ -216,18 +252,24 @@ def _extract_image(product_data):
         return image.replace("{size}", "375")
     return None
 
+
 def _detect_category(product_data, redux_product):
     if isinstance(redux_product, dict):
         categories = redux_product.get("categories")
         if isinstance(categories, list) and categories:
             last = categories[-1]
-            name = _extract_first_string(last.get("categoryName")) if isinstance(last, dict) else None
+            name = (
+                _extract_first_string(last.get("categoryName"))
+                if isinstance(last, dict)
+                else None
+            )
             if name:
                 return name
     category = product_data.get("category")
     if category:
         return category
     return "unknown"
+
 
 def _extract_availability(product_data, redux_product):
     offers = product_data.get("offers")
@@ -238,6 +280,7 @@ def _extract_availability(product_data, redux_product):
             return "https://schema.org/InStock"
         return "https://schema.org/OutOfStock"
     return None
+
 
 def _extract_custom_data(product_data, redux_product):
     custom = {}
@@ -252,7 +295,11 @@ def _extract_custom_data(product_data, redux_product):
 
         categories = redux_product.get("categories")
         if isinstance(categories, list) and categories:
-            names = [c.get("categoryName") for c in categories if isinstance(c, dict) and c.get("categoryName")]
+            names = [
+                c.get("categoryName")
+                for c in categories
+                if isinstance(c, dict) and c.get("categoryName")
+            ]
             if names:
                 custom["category_path"] = names
 
@@ -298,6 +345,7 @@ def _extract_custom_data(product_data, redux_product):
 
     return custom
 
+
 def build_product_dataset(product_data, soup=None):
     if not isinstance(product_data, dict):
         return {
@@ -313,7 +361,8 @@ def build_product_dataset(product_data, soup=None):
             "description": None,
             "availability": None,
             "item_condition": None,
-            "custom_data": {},}
+            "custom_data": {},
+        }
 
     redux = _extract_redux_store(soup) if soup is not None else None
     redux_product = _extract_redux_product(redux)
@@ -338,12 +387,14 @@ def build_product_dataset(product_data, soup=None):
         "url": offers.get("url"),
         "sku": product_data.get("sku"),
         "image": _extract_image(product_data),
-        "description": _build_description(soup, product_data) if soup is not None else _extract_first_string(
-            product_data.get("description")
-        ),
+        "description": _build_description(soup, product_data)
+        if soup is not None
+        else _extract_first_string(product_data.get("description")),
         "availability": _extract_availability(product_data, redux_product),
         "item_condition": offers.get("itemCondition"),
-        "custom_data": _extract_custom_data(product_data, redux_product),}
+        "custom_data": _extract_custom_data(product_data, redux_product),
+    }
+
 
 def extract_product_dataset(soup, category="unknown", custom_data=None):
     product_data = extract_product_data(soup)
@@ -354,8 +405,10 @@ def extract_product_dataset(soup, category="unknown", custom_data=None):
         dataset["custom_data"].update(custom_data)
     return dataset
 
+
 def product_dataset_to_json(dataset):
     return json.dumps(dataset, ensure_ascii=False)
+
 
 if __name__ == "__main__":
     url = "https://www.hepsiburada.com/karaca-tea-break-inox-siyah-celik-su-isitici-cay-makinesi-pm-HBC00002JH1M2"
@@ -367,9 +420,19 @@ if __name__ == "__main__":
         dataset = extract_product_dataset(soup)
         print(json.dumps(dataset, ensure_ascii=False, indent=2))
     elif response.status_code == 404:
-        print(json.dumps({"status": 404, "message": "Product not found"}, ensure_ascii=False))
+        print(
+            json.dumps(
+                {"status": 404, "message": "Product not found"}, ensure_ascii=False
+            )
+        )
     elif response.status_code == 403:
-        print(json.dumps({"status": 403, "message": "Access denied"}, ensure_ascii=False))
+        print(
+            json.dumps({"status": 403, "message": "Access denied"}, ensure_ascii=False)
+        )
     else:
-        print(json.dumps({"status": response.status_code, "message": "Unexpected status"}, ensure_ascii=False))
-
+        print(
+            json.dumps(
+                {"status": response.status_code, "message": "Unexpected status"},
+                ensure_ascii=False,
+            )
+        )

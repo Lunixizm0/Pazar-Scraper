@@ -71,5 +71,6 @@ def main() -> None:
     except Exception as exc:
         raise SystemExit(str(exc)) from exc
 
+
 if __name__ == "__main__":
     main()
