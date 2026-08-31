@@ -49,21 +49,25 @@ def _is_placeholder_description_text(value):
     return len(normalized) <= 3 and normalized.isalpha()
 
 
+def get_common_api_headers():
+    return {
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:154.0) Gecko/20100101 Firefox/154.0",
+        "Accept": "application/json, text/plain, */*",
+        "Accept-Language": "tr-TR,tr;q=0.9,en-US;q=0.8",
+        "x-agentname": "StorefrontProductGateway",
+        "x-web-req-source": "StorefrontProductGateway",
+        "Origin": "https://www.trendyol.com",
+        "Cookie": "platform=web; AZ_SELECTED=false; storefrontId=1; countryCode=TR; language=tr",
+    }
+
+
 def get_product_descriptions_from_api(product_id):
     if not product_id:
         return None
 
     try:
         url = f"https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/component-read/component/{product_id}"
-        headers = {
-            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:154.0) Gecko/20100101 Firefox/154.0",
-            "Accept": "application/json, text/plain, */*",
-            "Accept-Language": "tr-TR,tr;q=0.9,en-US;q=0.8",
-            "x-agentname": "StorefrontProductGateway",
-            "x-web-req-source": "StorefrontProductGateway",
-            "Origin": "https://www.trendyol.com",
-            "Cookie": "platform=web; AZ_SELECTED=false; countryCode=TR; language=tr",
-        }
+        headers = get_common_api_headers()
         params = {"channelId": "1"}
 
         response = requests.get(url, params=params, headers=headers, timeout=20)
@@ -91,6 +95,239 @@ def get_product_descriptions_from_api(product_id):
         return None
     except Exception as e:
         print(f"Error fetching product descriptions from API: {e}")
+        return None
+
+
+def get_reviews_from_api(product_id, page=0, page_size=5):
+    #Fetch product reviews, AI summary, and rating stats via review-read API
+    try:
+        url = "https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/review-read/product-reviews/detailed"
+        params = {"contentId": product_id, "page": page, "pageSize": page_size, "channelId": "1"}
+        response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
+        return response.json() if response.status_code == 200 else None
+    except Exception as e:
+        print(f"Error fetching reviews API: {e}")
+        return None
+
+
+def get_delivery_date_from_api(content_id, item_number, winner_listing_id):
+    #Fetch delivery dates and shipping info via delivery-date-content API
+    try:
+        url = f"https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/delivery-date-content/delivery-date/{content_id}/itemNumber/{item_number}"
+        params = {"winnerListingId": winner_listing_id, "channelId": "1"}
+        response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
+        return response.json() if response.status_code == 200 else None
+    except Exception as e:
+        print(f"Error fetching delivery date API: {e}")
+        return None
+
+
+def get_installment_from_api(amount, category_id, group_tag_ids, total_amount=None):
+    #Fetch per-bank installment plans via installment API
+    try:
+        url = "https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/installment/"
+        params = {
+            "amount": amount,
+            "totalAmount": total_amount or amount,
+            "categoryId": category_id,
+            "categoryIds": str(category_id),
+            "codEligible": "true",
+            "clientPage": "PDP",
+            "isUserTyPlusActive": "false",
+            "groupTagIds": group_tag_ids,
+            "channelId": "1",
+        }
+        response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
+        return response.json() if response.status_code == 200 else None
+    except Exception as e:
+        print(f"Error fetching installment API: {e}")
+        return None
+
+
+def get_merchant_questions_from_api(content_id, page=0, size=4, fulfilment_type="mp"):
+    #Fetch answered Q&A via merchant-questions API.
+    try:
+        url = f"https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/merchant-questions/content/{content_id}/answered"
+        params = {
+            "fulfilmentType": fulfilment_type,
+            "excludeTag": "false",
+            "page": page,
+            "size": size,
+            "isMobile": "false",
+            "channelId": "1",
+        }
+        response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
+        return response.json() if response.status_code == 200 else None
+    except Exception as e:
+        print(f"Error fetching merchant questions API: {e}")
+        return None
+
+
+def get_seller_acceptance_from_api(seller_id):
+    #Check seller question acceptance status via seller-acceptance API.
+    try:
+        url = "https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/merchant-questions/seller-acceptance"
+        params = {"sellerId": seller_id, "isMobile": "false", "channelId": "1"}
+        response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
+        return response.json() if response.status_code == 200 else None
+    except Exception as e:
+        print(f"Error fetching seller acceptance API: {e}")
+        return None
+
+
+def get_video_content_from_api(video_id):
+    #Fetch video metadata (MP4 URL, thumbnail) via video-content API.
+    try:
+        url = f"https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/video-content/{video_id}"
+        params = {"channelId": "1"}
+        response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
+        return response.json() if response.status_code == 200 else None
+    except Exception as e:
+        print(f"Error fetching video content API: {e}")
+        return None
+
+
+def get_currencies_from_api(culture="tr-TR", storefront_id=1):
+    #Fetch TCMB exchange rates via currencies API.
+    try:
+        url = "https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/currencies"
+        params = {"storefrontId": storefront_id, "culture": culture, "channelId": "1"}
+        response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
+        return response.json() if response.status_code == 200 else None
+    except Exception as e:
+        print(f"Error fetching currencies API: {e}")
+        return None
+
+
+def get_stickers_from_api(sticker_ids, platform="WEB"):
+    #Fetch decorative/promotional stickers via stickers API
+    try:
+        url = "https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/stickers/stickers"
+        params = {"stickerIds": sticker_ids, "platform": platform, "channelId": "1"}
+        response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
+        return response.json() if response.status_code == 200 else None
+    except Exception as e:
+        print(f"Error fetching stickers API: {e}")
+        return None
+
+
+def get_complete_the_look_from_api(content_id, culture="tr-TR"):
+    #Fetch complete-the-look markers via complete-the-look API.
+    try:
+        url = "https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/complete-the-look/markers"
+        params = {
+            "contentId": content_id,
+            "intersactionAreaPadding": 5,
+            "pointLabelGap": 30,
+            "labelsGap": 4,
+            "labelHeight": 28,
+            "imageSize": "398x597",
+            "labelPrefix": "+",
+            "culture": culture,
+            "channelId": "1",
+        }
+        response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
+        return response.json() if response.status_code == 200 else None
+    except Exception as e:
+        print(f"Error fetching complete the look API: {e}")
+        return None
+
+
+def get_slicing_attributes_from_api(group_id, content_id):
+    #Fetch product variant options (colors, sizes) via slicing-attributes API.
+    try:
+        url = f"https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/slicing-attributes/product-group/{group_id}/slicing-attributes"
+        params = {"contentId": content_id, "channelId": "1"}
+        response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
+        return response.json() if response.status_code == 200 else None
+    except Exception as e:
+        print(f"Error fetching slicing attributes API: {e}")
+        return None
+
+
+def get_social_proof_from_api(content_ids):
+    #Fetch favorite count / social proof badges via social-proof API.
+    try:
+        url = "https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/social-proof/"
+        params = {"contentIds": content_ids, "channelId": "1"}
+        response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
+        return response.json() if response.status_code == 200 else None
+    except Exception as e:
+        print(f"Error fetching social proof API: {e}")
+        return None
+
+
+def get_seller_store_from_api(seller_id):
+    #Fetch merchant store info (score, metrics, tenure) via seller-store API.
+    try:
+        url = f"https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/seller-store/{seller_id}/header-information"
+        params = {"channelId": "1"}
+        response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
+        return response.json() if response.status_code == 200 else None
+    except Exception as e:
+        print(f"Error fetching seller store API: {e}")
+        return None
+
+
+def get_seller_follower_from_api(seller_id, culture="tr-TR"):
+    #Fetch merchant store follower count via sellerstore-follow API.
+    try:
+        url = f"https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/sellerstore-follow/{seller_id}/follower-count"
+        params = {"culture": culture, "channelId": "1", "checkCoupon": "true"}
+        response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
+        return response.json() if response.status_code == 200 else None
+    except Exception as e:
+        print(f"Error fetching seller follower API: {e}")
+        return None
+
+
+def get_stamps_from_api(tag_ids, platform="WEB"):
+    #Fetch promotional stamps / badges via stamps API.
+    try:
+        url = "https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/stamps/"
+        params = {"tagIds": tag_ids, "platform": platform, "channelId": "1"}
+        response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
+        return response.json() if response.status_code == 200 else None
+    except Exception as e:
+        print(f"Error fetching stamps API: {e}")
+        return None
+
+
+def get_product_eligibility_from_api(category_id, bank_category_id, price, culture="tr-TR", storefront_id=1):
+    #Fetch product eligibility status via product-eligibility API.
+    try:
+        url = "https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/product-eligibility/"
+        params = {
+            "categoryId": category_id,
+            "bankCategoryId": bank_category_id,
+            "price": price,
+            "culture": culture,
+            "storefrontId": storefront_id,
+            "channelId": "1",
+        }
+        response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
+        return response.json() if response.status_code == 200 else None
+    except Exception as e:
+        print(f"Error fetching product eligibility API: {e}")
+        return None
+
+# TODO: Get the body shit from product dynamicly
+def get_vas_from_api(product_id=None, storefront_id=1, language="tr"):
+    #Fetch value-added services (extended warranty, insurance) via vas POST API.
+    try:
+        url = "https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/vas/"
+        params = {"storefrontId": storefront_id, "language": language, "channelId": "1"}
+        # Post with minimal payload - not READY
+        payload = {
+            "productId": product_id,
+            "storefrontId": storefront_id,
+            "language": language,
+            "channelId": "1",
+        } if product_id else {}
+        response = requests.post(url, params=params, json=payload, headers=get_common_api_headers(), timeout=20)
+        return response.json() if response.status_code == 200 else None
+    except Exception as e:
+        print(f"Error fetching VAS API: {e}")
         return None
 
 

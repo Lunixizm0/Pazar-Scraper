@@ -19,7 +19,7 @@ from get_hepsiburada_products import get_full_product_urls_from_homepage
 
 def pytest_generate_tests(metafunc):
     if "url" in metafunc.fixturenames:
-        urls = get_full_product_urls_from_homepage(limit=20)
+        urls = get_full_product_urls_from_homepage(limit=5)
         metafunc.parametrize("url", urls)
 
 

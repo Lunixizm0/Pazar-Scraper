@@ -65,7 +65,7 @@ def get_full_product_urls_from_homepage(limit=5):
 
 if __name__ == "__main__":
     print("Fetching products from Hepsiburada homepage...\n")
-    urls = get_full_product_urls_from_homepage(limit=10)
+    urls = get_full_product_urls_from_homepage(limit=5)
     if urls:
         print(f"Found {len(urls)} full product URLs:")
         for url in urls:

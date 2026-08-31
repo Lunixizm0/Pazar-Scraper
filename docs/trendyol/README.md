@@ -10,7 +10,7 @@ https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api
 
 ## Common Request Headers
 
-The storefront gateway's anti-bot checks are bypassed by using the `x-agentname` + `x-web-req-source` + `Origin` combination together with a `csrf-secret` cookie. With these, many endpoints are accessible via plain `requests`:
+The storefront gateway's anti-bot checks are bypassed by using the `x-agentname` + `x-web-req-source` + `Origin` and etc. With these, **all 18 endpoints are accessible via plain `requests`**:
 
 | Header | Value |
 | --- | --- |
@@ -24,57 +24,34 @@ The storefront gateway's anti-bot checks are bypassed by using the `x-agentname`
 
 Note: Without `countryCode=TR` the gateway returns `418` ("Required country information is wrong or missing").
 
-## Accessibility (requests vs browser)
+## Accessibility
 
-Some endpoints work with plain `requests`/curl, while others have stricter WAF protection and require a real browser session (camoufox/Playwright).
-
-### Working with plain `requests`
-- [review_read.md](review_read.md) - reviews, AI summary, rating distribution
-- [component_data.md](component_data.md) - product description blocks (already used in the project)
-- [delivery_date.md](delivery_date.md) - delivery date/cargo time
-- [installment.md](installment.md) - per-bank installment options (intermittent 429)
-- [merchant_questions.md](merchant_questions.md) - answered Q&A
-- [seller_acceptance.md](seller_acceptance.md) - whether seller accepts questions
-- [video_content.md](video_content.md) - product video
-- [currencies.md](currencies.md) - TCMB exchange rates
-- [stickers.md](stickers.md) - product stickers
-- [complete_the_look.md](complete_the_look.md) - "complete the look" markers
-
-### Browser (camoufox) required
-- [slicing_attributes.md](slicing_attributes.md) - variants/colors
-- [social_proof.md](social_proof.md) - favorite count
-- [seller_store.md](seller_store.md) - seller store info
-- [sellerstore_follow.md](sellerstore_follow.md) - seller follower count
-- [stamps.md](stamps.md) - product badges
-- [product_eligibility.md](product_eligibility.md) - product eligibility check
-
-### External / Cloudflare protected
-- [kredi_teklifleri.md](kredi_teklifleri.md) - `coc-webview.trendyol.com` credit endpoint (returns 403). The same installment data is available via [installment.md](installment.md) which is preferred.
+All 18 endpoints work with plain `requests`/curl when using the header combination above. No endpoints require a real browser session.
 
 ## Endpoint List
 
-| # | Endpoint | Purpose | Access |
+| # | Endpoint | Purpose | Parameters |
 | --- | --- | --- | --- |
-| 1 | [review_read.md](review_read.md) `/review-read/product-reviews/detailed` | Reviews + AI summary | requests |
-| 2 | [component_data.md](component_data.md) `/component-read/component/{id}` | Description | requests |
-| 3 | [delivery_date.md](delivery_date.md) `/delivery-date-content/delivery-date/{contentId}/itemNumber/{itemNo}` | Delivery | requests |
-| 4 | [installment.md](installment.md) `/installment/` | Installments | requests* |
-| 5 | [merchant_questions.md](merchant_questions.md) `/merchant-questions/content/{id}/answered` | Q&A | requests |
-| 6 | [seller_acceptance.md](seller_acceptance.md) `/merchant-questions/seller-acceptance` | Question acceptance | requests |
-| 7 | [video_content.md](video_content.md) `/video-content/{id}` | Video | - |
-| 8 | [currencies.md](currencies.md) `/currencies` | Exchange rates | requests |
-| 9 | [stickers.md](stickers.md) `/stickers/stickers` | Stickers | - |
-| 10 | [complete_the_look.md](complete_the_look.md) `/complete-the-look/markers` | CTL | - |
-| 11 | [slicing_attributes.md](slicing_attributes.md) `/slicing-attributes/product-group/{gid}/slicing-attributes` | Variants | browser |
-| 12 | [social_proof.md](social_proof.md) `/social-proof/` | Favorites | browser |
-| 13 | [seller_store.md](seller_store.md) `/seller-store/{sid}/header-information` | Seller | browser |
-| 14 | [sellerstore_follow.md](sellerstore_follow.md) `/sellerstore-follow/{sid}/follower-count` | Followers | browser |
-| 15 | [stamps.md](stamps.md) `/stamps/` | Badges | browser |
-| 16 | [product_eligibility.md](product_eligibility.md) `/product-eligibility/` | Eligibility | browser |
-| 17 | [vas.md](vas.md) `/vas/` (POST) | VAS/insurance | - |
-| 18 | [kredi_teklifleri.md](kredi_teklifleri.md) `coc-webview/.../monthly-payments/calculated` | Credit (external) | Cloudflare |
+| 1 | [`review-read/product-reviews/detailed`](review_read.md) `/review-read/product-reviews/detailed` | Reviews + AI summary | `contentId`, `page`, `pageSize`, `channelId` |
+| 2 | [`component-read/component/{id}`](component_data.md) `/component-read/component/{id}` | Description | `componentId`, `channelId` |
+| 3 | [`delivery-date-content/delivery-date/{contentId}/itemNumber/{itemNo}`](delivery_date.md) `/delivery-date-content/delivery-date/{contentId}/itemNumber/{itemNo}` | Delivery | `contentId`, `itemNumber`, `winnerListingId`, `channelId` |
+| 4 | [`installment/`](installment.md) `/installment/` | Installments | `amount`, `totalAmount`, `categoryId`, `categoryIds`, `codEligible`, `clientPage`, `isUserTyPlusActive`, `groupTagIds`, `channelId` |
+| 5 | [`merchant-questions/content/{id}/answered`](merchant_questions.md) `/merchant-questions/content/{id}/answered` | Q&A | `contentId`, `fulfilmentType`, `excludeTag`, `page`, `size`, `isMobile`, `channelId` |
+| 6 | [`merchant-questions/seller-acceptance`](seller_acceptance.md) `/merchant-questions/seller-acceptance` | Question acceptance | `sellerId`, `isMobile`, `channelId` |
+| 7 | [`video-content/{videoId}`](video_content.md) `/video-content/{videoId}` | Video | `videoId`, `channelId` |
+| 8 | [`currencies`](currencies.md) `/currencies` | Exchange rates | `storefrontId`, `culture`, `channelId` |
+| 9 | [`stickers/stickers`](stickers.md) `/stickers/stickers` | Stickers | `stickerIds`, `platform`, `channelId` |
+| 10 | [`complete-the-look/markers`](complete_the_look.md) `/complete-the-look/markers` | CTL | `contentId`, `intersactionAreaPadding`, `pointLabelGap`, `labelsGap`, `labelHeight`, `imageSize`, `labelPrefix`, `culture`, `channelId` |
+| 11 | [`slicing-attributes/product-group/{gid}/slicing-attributes`](slicing_attributes.md) `/slicing-attributes/product-group/{gid}/slicing-attributes` | Variants | `groupId`, `contentId`, `channelId` |
+| 12 | [`social-proof/`](social_proof.md) `/social-proof/` | Favorites | `contentIds`, `channelId` |
+| 13 | [`seller-store/{sid}/header-information`](seller_store.md) `/seller-store/{sid}/header-information` | Seller | `sellerId`, `channelId` |
+| 14 | [`sellerstore-follow/{sid}/follower-count`](sellerstore_follow.md) `/sellerstore-follow/{sid}/follower-count` | Followers | `sellerId`, `culture`, `checkCoupon`, `channelId` |
+| 15 | [`stamps/`](stamps.md) `/stamps/` | Badges | `tagIds`, `platform`, `channelId` |
+| 16 | [`product-eligibility/`](product_eligibility.md) `/product-eligibility/` | Eligibility | (parameters vary) |
+| 17 | [`vas/`](vas.md) `/vas/` (POST) | VAS/insurance | `storefrontId`, `language`, `channelId` (JSON body) |
+| 18 | [`kredi-teklifleri`](kredi_teklifleri.md) `coc-webview/.../monthly-payments/calculated` | Credit (external) | Cloudflare protected (returns 403) |
 
-*asterisk: may intermittently return 429; add a short delay between calls.
+*asterisk: installment endpoint may intermittently return `429` under burst rate limits; add a short delay between calls.*
 
 ## Example: Real working curl request
 
@@ -87,4 +64,3 @@ curl "https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/re
   -H "x-web-req-source: StorefrontProductGateway" \
   -H "Origin: https://www.trendyol.com" \
   -H "Cookie: platform=web; AZ_SELECTED=false; storefrontId=1; countryCode=TR; language=tr; csrf-secret=..."
-```

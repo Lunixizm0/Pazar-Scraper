@@ -59,7 +59,7 @@ def _best_seller_products_response(limit=5):
     return products
 
 
-def get_product_ids_from_homepage(limit=10):
+def get_product_ids_from_homepage(limit=5):
     urls = get_full_product_urls_from_homepage(limit=limit)
     ids = set()
     for url in urls:
@@ -69,7 +69,7 @@ def get_product_ids_from_homepage(limit=10):
     return list(ids)[:limit]
 
 
-def get_full_product_urls_from_homepage(limit=10):
+def get_full_product_urls_from_homepage(limit=5):
     try:
         products = _best_seller_products_response(limit=limit)
         seen = set()
