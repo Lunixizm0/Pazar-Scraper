@@ -18,7 +18,6 @@ from scrape.utils.trendyol import (
 sys.path.insert(0, str(Path(__file__).parent))
 from get_products import (
     get_full_product_urls_from_homepage,
-    get_product_ids_from_homepage,
 )
 
 
@@ -83,6 +82,25 @@ def test_extracts_price_from_live_trendyol_product(url):
     assert dataset.price is not None
     assert "brand" not in dataset.custom_data
     assert "color" not in dataset.custom_data
-    # Description should contain product info (either from API or attributes)
     assert dataset.description is not None and len(dataset.description) > 10, f"Description too short: {dataset.description}"
+    json.loads(product_dataset_to_json(dataset))
+
+
+def test_live_trendyol_product_has_reviews_and_listings(url):
+    response = get_raw_html(url)
+    assert response.status_code == 200, f"Request failed for {url}: {response.status_code}"
+
+    soup = parse_html(response.content)
+    dataset = extract_product_dataset(soup)
+
+    reviews = dataset.custom_data.get("reviews")
+    assert reviews is not None, f"No reviews found on {url}"
+    assert isinstance(reviews, dict), f"Unexpected reviews type on {url}: {reviews}"
+    assert "score" in reviews or "count" in reviews
+
+    listings = dataset.custom_data.get("listings")
+    assert listings is not None, f"No listings found on {url}"
+    assert isinstance(listings, list) and len(listings) > 0, f"Empty listings on {url}"
+    assert all("merchant" in listing for listing in listings), f"Listing missing merchant on {url}"
+
     json.loads(product_dataset_to_json(dataset))

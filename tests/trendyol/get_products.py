@@ -17,7 +17,7 @@ def _normalize_trendyol_product_url(value):
     return f"https://www.trendyol.com/{value.lstrip('/')}"
 
 
-def _best_seller_products_response(limit=20):
+def _best_seller_products_response(limit=5):
     page_url = "https://www.trendyol.com/cok-satanlar?type=bestSeller&webGenderId=1"
     session = requests.Session()
     headers = {

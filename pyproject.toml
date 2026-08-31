@@ -1,7 +1,7 @@
 [project]
-name = "scrape"
-version = "0.1.0"
-description = "Add your description here"
+name = "pazar-scraper"
+version = "1.0.0"
+description = "Python web scraper for extracting structured product data from Turkish e-commerce platforms"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
@@ -16,6 +16,9 @@ scrape = "scrape:main"
 [tool.ruff]
 lint.ignore = ["F401", "BLE001"]
 
+[tool.pyright]
+reportMissingImports = false
+
 [build-system]
 requires = ["uv_build>=0.12.7,<0.13.0"]
 build-backend = "uv_build"
@@ -24,4 +27,5 @@ build-backend = "uv_build"
 dev = [
     "pytest>=9.1.1",
     "ruff>=0.16.5",
+    "urllib3>=2.7.0",
 ]
