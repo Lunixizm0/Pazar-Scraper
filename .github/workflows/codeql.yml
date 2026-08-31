@@ -24,10 +24,10 @@ jobs:
         include:
           - name: Local Analysis
             mode: local
-            queries: extended
+            queries: security-extended
           - name: Remote Extended
             mode: remote
-            queries: extended
+            queries: security-extended
 
     steps:
       - name: Checkout repository
