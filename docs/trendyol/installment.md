@@ -14,14 +14,14 @@ GET https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/inst
 
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
-| `amount` | number | Yes | The product price (e.g. `4199`). |
-| `totalAmount` | number | Yes | Total amount (usually equals `amount`). |
-| `categoryId` | number | Yes | Product category id (e.g. `1058`). |
-| `categoryIds` | string | Yes | Comma-separated category ids (e.g. `1058`). |
-| `codEligible` | boolean | Yes | Whether cash-on-delivery is eligible (e.g. `true`). |
-| `clientPage` | string | Yes | Client page context, e.g. `PDP`. |
-| `isUserTyPlusActive` | boolean | Yes | Whether the user has active Ty+ membership (e.g. `false`). |
-| `groupTagIds` | string | Yes | Group tag id (UUID) of the product. |
+| `amount` | number | yes | The product price (e.g. `4199`). |
+| `totalAmount` | number | NO | Total amount (usually equals `amount`). |
+| `categoryId` | number | NO | Product category id (e.g. `1058`). |
+| `categoryIds` | string | NO | Comma-separated category ids (e.g. `1058`). |
+| `codEligible` | boolean | NO | Whether cash-on-delivery is eligible (e.g. `true`). |
+| `clientPage` | string | NO | Client page context, e.g. `PDP`. |
+| `isUserTyPlusActive` | boolean | NO | Whether the user has active Ty+ membership (e.g. `false`). |
+| `groupTagIds` | string | No | Group tag id (UUID) of the product. |
 | `channelId` | number | Yes | The sales channel identifier. Use `1` for the web channel. |
 
 Most of these values are readily available from the product page itself (price, category id) or from other endpoints (groupTagIds can be parsed from Redux/SHARED_PROPS state).

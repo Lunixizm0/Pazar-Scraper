@@ -12,9 +12,9 @@ GET https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/curr
 
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
-| `storefrontId` | number | Yes | e.g. `1`. |
-| `culture` | string | Yes | e.g. `tr-TR`. |
-| `channelId` | number | Yes | The sales channel identifier. Use `1` for the web channel. |
+| `storefrontId` | number | NO | e.g. `1`. |
+| `culture` | string | NO | e.g. `tr-TR`. |
+| `channelId` | number | NO | The sales channel identifier. Use `1` for the web channel. |
 
 ## Request Headers
 

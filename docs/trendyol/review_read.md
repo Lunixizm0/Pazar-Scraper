@@ -13,9 +13,9 @@ GET https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/revi
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | `contentId` | number | Yes | The unique product identifier (e.g. `1081766367`). |
-| `page` | number | Yes | Zero-based page index of the reviews to fetch (e.g. `0`). |
-| `pageSize` | number | Yes | Number of reviews per page (e.g. `5`; larger values like `10`/`20` are accepted). |
-| `channelId` | number | Yes | The sales channel identifier. Use `1` for the web channel. |
+| `page` | number | NO | Zero-based page index of the reviews to fetch (e.g. `0`). |
+| `pageSize` | number | NO | Number of reviews per page (e.g. `5`; larger values like `10`/`20` are accepted). |
+| `channelId` | number | NO | The sales channel identifier. Use `1` for the web channel. |
 
 ## Request Headers
 

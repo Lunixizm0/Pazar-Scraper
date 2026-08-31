@@ -13,14 +13,10 @@ GET https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/stam
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | `tagIds` | string | Yes | URL-encoded, comma-separated tag ids (e.g. `4905%2C8581%2C9637`). |
-| `platform` | string | Yes | e.g. `WEB`. |
-| `channelId` | number | Yes | The sales channel identifier. Use `1` for the web channel. |
+| `platform` | string | NO | e.g. `WEB`. |
+| `channelId` | number | NO | The sales channel identifier. Use `1` for the web channel. |
 
 The `tagIds` come from the product's shared state; each tag id maps to a named stamp.
-
-## Request Headers
-
-Requires the full browser-style header set; in our tests this returned sporadic `429` for non-browser (curl) clients (browser-only endpoint).
 
 ## Response
 
@@ -48,28 +44,78 @@ Top-level wrapper: `{ "isSuccess", "statusCode", "result" }`. The `result` is an
 GET https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/stamps/?tagIds=4905%2C8581%2C9637&platform=WEB&channelId=1
 ```
 
-**Response (excerpt):**
+**Response:**
 
 ``` json
 {
-  "isSuccess": true,
-  "statusCode": 200,
-  "result": {
-    "4905": {
-      "name": "installment_pft3",
-      "displayName": "Peşin Fiyatına 3 Taksit",
-      "stamps": [
-        { "stampUrl": "/indexing-sticker-stamp/mars/2eca585d-1905-44a4-898e-965cb78d033a.png", "position": "lower-left", "stampType": "payment", "type": "TypeA", "priority": 900, "aspectRatio": 0.25 },
-        { "stampText": "Peşin Fiyatına 3 Taksit", "position": "lower-left", "stampType": "payment", "type": "TypeB", "colorCode": "#343BBF", "priority": 900, "aspectRatio": 0.25 }
-      ]
-    },
-    "8581": {
-      "name": "son 10 günün en düşük fiyatı",
-      "displayName": "son 10 günün en düşük fiyatı",
-      "stamps": [
-        { "stampText": "10 Günün En Düşük Fiyatı", "position": "upper-left", "stampType": "LowestPriceDuration", "type": "TypeB", "colorCode": "#BB0000", "priority": 997, "aspectRatio": 0.25 }
-      ]
+    "isSuccess": true,
+    "statusCode": 200,
+    "result": {
+        "4905": {
+            "name": "installment_pft3",
+            "displayName": "Peşin Fiyatına 3 Taksit",
+            "cultures": [
+                "tr-TR"
+            ],
+            "stamps": [
+                {
+                    "stampUrl": "/indexing-sticker-stamp/mars/2eca585d-1905-44a4-898e-965cb78d033a.png",
+                    "position": "lower-left",
+                    "stampType": "payment",
+                    "type": "TypeA",
+                    "priority": 900,
+                    "aspectRatio": 0.25
+                },
+                {
+                    "stampText": "Peşin Fiyatına 3 Taksit",
+                    "stampUrl": "",
+                    "position": "lower-left",
+                    "stampType": "payment",
+                    "type": "TypeB",
+                    "colorCode": "#343BBF",
+                    "priority": 900,
+                    "aspectRatio": 0.25
+                }
+            ],
+            "isSearchable": false
+        },
+        "8581": {
+            "name": "son 10 günün en düşük fiyatı",
+            "displayName": "son 10 günün en düşük fiyatı",
+            "cultures": [
+                "tr-TR"
+            ],
+            "stamps": [
+                {
+                    "stampUrl": "/indexing-sticker-stamp/mars/81901534-f3f6-4495-8d32-d2bcc648ec11.png",
+                    "position": "upper-left",
+                    "stampType": "LowestPriceDuration",
+                    "type": "TypeA",
+                    "priority": 997,
+                    "aspectRatio": 0.25
+                },
+                {
+                    "stampText": "10 Günün En Düşük Fiyatı",
+                    "stampUrl": "",
+                    "position": "upper-left",
+                    "stampType": "LowestPriceDuration",
+                    "type": "TypeB",
+                    "colorCode": "#BB0000",
+                    "priority": 997,
+                    "aspectRatio": 0.25
+                }
+            ],
+            "isSearchable": false
+        },
+        "9637": {
+            "name": "eventdeal",
+            "displayName": "eventdeal",
+            "cultures": [
+                "tr-TR"
+            ],
+            "stamps": [],
+            "isSearchable": true
+        }
     }
-  }
 }
 ```

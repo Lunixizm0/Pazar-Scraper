@@ -19,11 +19,7 @@ GET https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/slic
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | `contentId` | number | Yes | The current product id (e.g. `1081766367`). |
-| `channelId` | number | Yes | The sales channel identifier. Use `1` for the web channel. |
-
-## Request Headers
-
-Requires the full browser-style header set. In our tests this endpoint returned `429`/`418` for non-browser (curl) clients behind the storefront gateway's stricter WAF rules, though it works when issued from a real browser session. See notes in the main README about the ones that need a browser.
+| `channelId` | number | NO | The sales channel identifier. Use `1` for the web channel. |
 
 ## Response
 
@@ -50,32 +46,64 @@ GET https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/slic
 
 ``` json
 {
-  "isSuccess": true,
-  "statusCode": 200,
-  "result": [
-    {
-      "type": "DsmColor",
-      "title": "Renk",
-      "displayType": "IMAGE_ONLY",
-      "values": [
+    "isSuccess": true,
+    "statusCode": 200,
+    "result": [
         {
-          "name": "Siyah",
-          "beautifiedName": "siyah",
-          "isSelected": true,
-          "products": [
-            {
-              "id": 1081766367,
-              "name": "Redmi Buds 8 Pro Siyah Bluetooth Kulakiçi Kulaklık TWS - ANC BT 5.4",
-              "pageUrl": "/xiaomi/redmi-buds-8-pro-siyah-...-p-1081766367",
-              "imageUrl": "https://cdn.dsmcdn.com/mnresize/128/192/ty1000319/.../1_org_zoom.jpg",
-              "merchantId": 624588,
-              "campaignId": 61,
-              "isSelected": true
-            }
-          ]
+            "type": "DsmColor",
+            "title": "Renk",
+            "displayType": "IMAGE_ONLY",
+            "values": [
+                {
+                    "name": "Siyah",
+                    "beautifiedName": "siyah",
+                    "isSelected": true,
+                    "products": [
+                        {
+                            "id": 1081766367,
+                            "name": "Redmi Buds 8 Pro Siyah Bluetooth Kulakiçi Kulaklık TWS - ANC BT 5.4 (Xiaomi TR Garantili)",
+                            "pageUrl": "/xiaomi/redmi-buds-8-pro-siyah-bluetooth-kulakici-kulaklik-tws-anc-bt-5-4-xiaomi-tr-garantili-p-1081766367",
+                            "imageUrl": "https://cdn.dsmcdn.com/mnresize/128/192/ty1000319/product/media/images/prod/PIM/20260227/12/a9dc7313-301e-4256-babd-8e0d08ee7623/1_org_zoom.jpg",
+                            "merchantId": 968,
+                            "campaignId": 689770,
+                            "isSelected": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Mavi",
+                    "beautifiedName": "mavi-c",
+                    "isSelected": false,
+                    "products": [
+                        {
+                            "id": 1081766366,
+                            "name": "Redmi Buds 8 Pro Mavi Bluetooth Kulakiçi Kulaklık TWS - ANC BT 5.4 (Xiaomi TR Garantili)",
+                            "pageUrl": "/xiaomi/redmi-buds-8-pro-mavi-bluetooth-kulakici-kulaklik-tws-anc-bt-5-4-xiaomi-tr-garantili-p-1081766366",
+                            "imageUrl": "https://cdn.dsmcdn.com/mnresize/128/192/ty1000314/product/media/images/prod/PIM/20260227/12/387739a4-5872-40ae-8f53-c42590af6f72/1_org_zoom.jpg",
+                            "merchantId": 984136,
+                            "campaignId": 61,
+                            "isSelected": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Beyaz",
+                    "beautifiedName": "beyaz",
+                    "isSelected": false,
+                    "products": [
+                        {
+                            "id": 1081766368,
+                            "name": "Redmi Buds 8 Pro Beyaz Bluetooth Kulakiçi Kulaklık TWS - ANC BT 5.4 (Xiaomi TR Garantili)",
+                            "pageUrl": "/xiaomi/redmi-buds-8-pro-beyaz-bluetooth-kulakici-kulaklik-tws-anc-bt-5-4-xiaomi-tr-garantili-p-1081766368",
+                            "imageUrl": "https://cdn.dsmcdn.com/mnresize/128/192/ty1000057/product/media/images/prod/PIM/20260108/14/9cd8faab-d1e4-4258-be29-9473c8fffedd/1_org_zoom.jpg",
+                            "merchantId": 968,
+                            "campaignId": 689770,
+                            "isSelected": false
+                        }
+                    ]
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }
 ```

@@ -22,22 +22,21 @@ GET https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/sell
 | `checkCoupon` | boolean | Yes | e.g. `true`. |
 | `channelId` | number | Yes | The sales channel identifier. Use `1` for the web channel. |
 
-## Request Headers
-
-Requires the full browser-style header set; in our tests this returned `429` for non-browser (curl) clients (browser-only endpoint).
+## Example GET
+```
+GET https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/sellerstore-follow/624588/follower-count?channelId=1
+```
 
 ## Response
 
 ``` json
 {
-  "isSuccess": true,
-  "statusCode": 200,
-  "result": {
-    "count": 183960,
-    "text": "184,0B",
-    "hasCoupon": false,
-    "coupon": {}
-  }
+    "isSuccess": true,
+    "statusCode": 200,
+    "result": {
+        "count": 184250,
+        "text": "184,2B"
+    }
 }
 ```
 

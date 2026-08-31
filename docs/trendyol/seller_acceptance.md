@@ -14,7 +14,7 @@ GET https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/merc
 | --- | --- | --- | --- |
 | `sellerId` | number | Yes | The merchant/seller id (e.g. `624588`). |
 | `isMobile` | boolean | Yes | e.g. `false`. |
-| `channelId` | number | Yes | The sales channel identifier. Use `1` for the web channel. |
+| `channelId` | number | NO | The sales channel identifier. Use `1` for the web channel. |
 
 ## Request Headers
 
@@ -31,3 +31,8 @@ Same header set as the other storefront endpoints (see `review_read.md`).
 
 - **`isSellerAcceptQuestions`** - boolean; whether the seller accepts questions.
 - **`isSuccess`** - boolean.
+
+# Example GET
+```
+GET https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/merchant-questions/seller-acceptance?sellerId=624588&isMobile=false&channelId=1
+```

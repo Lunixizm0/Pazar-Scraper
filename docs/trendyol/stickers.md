@@ -13,8 +13,8 @@ GET https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/stic
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | `stickerIds` | string | Yes | Comma-separated sticker ids (e.g. `1044`). |
-| `platform` | string | Yes | e.g. `WEB`. |
-| `channelId` | number | Yes | The sales channel identifier. Use `1` for the web channel. |
+| `platform` | string | Yes | e.g. `WEB`, `ANDROID`, `IOS`. |
+| `channelId` | number | NO | The sales channel identifier. Use `1` for the web channel. |
 
 ## Request Headers
 
@@ -41,15 +41,15 @@ GET https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/stic
 
 ``` json
 {
-  "isSuccess": true,
-  "statusCode": 200,
-  "result": [
-    {
-      "description": "",
-      "stickerImageUrl": "https://cdn.dsmcdn.com/indexing-sticker-stamp/moon/d5a057a9-a08c-4d86-9d62-71eaa53b87b1.png",
-      "stickerClickableUrl": "https://www.trendyol.com/s/bluetooth-kulakliklarinda-sikca-sorulan-sorular",
-      "isAuthorizedSellerSticker": false
-    }
-  ]
+    "isSuccess": true,
+    "statusCode": 200,
+    "result": [
+        {
+            "description": "",
+            "stickerImageUrl": "https://cdn.dsmcdn.com/indexing-sticker-stamp/moon/98388081-20db-4862-9367-2f698d53eeea.png",
+            "stickerClickableUrl": "ty://?Page=InWeb&WebUrl=https%3A%2F%2Fm.trendyol.com%2Fs%2Fbluetooth-kulakliklarinda-sikca-sorulan-sorular",
+            "isAuthorizedSellerSticker": false
+        }
+    ]
 }
 ```

@@ -15,10 +15,6 @@ GET https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/soci
 | `contentIds` | string | Yes | Comma-separated product ids (e.g. `1081766367`). |
 | `channelId` | number | Yes | The sales channel identifier. Use `1` for the web channel. |
 
-## Request Headers
-
-Requires the full browser-style header set; in our tests this returned `429` for non-browser (curl) clients (browser-only endpoint).
-
 ## Response
 
 The response is an object keyed by `contentId`; each value contains:

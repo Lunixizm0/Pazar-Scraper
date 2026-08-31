@@ -1,4 +1,4 @@
-# Satışla Birlikte Önerilen Ekstra Ürünler (VAS)
+# Satışla Birlikte Önerilen Ekstra Ürünler (VAS) THIS SHIT NEEDS UPDATEEEE
 
 Retrieves value-added services (VAS) offered alongside a product purchase - e.g. extended warranty / insurance packages with a calculated price, seller, category, and marketing description. This is a `POST` endpoint.
 
@@ -8,15 +8,13 @@ Retrieves value-added services (VAS) offered alongside a product purchase - e.g.
 POST https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/vas/
 ```
 
-## Query Parameters
+## Query Parameters (Known)
 
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | `storefrontId` | number | Yes | e.g. `1`. |
 | `language` | string | Yes | e.g. `tr`. |
 | `channelId` | number | Yes | The sales channel identifier. Use `1` for the web channel. |
-
-The request likely carries a JSON body identifying the product/category; the exact body was not captured. Observed as a `POST` with these query params.
 
 ## Response
 
@@ -32,7 +30,7 @@ Top-level wrapper: `{ "isSuccess", "statusCode", "result" }`. The `result` is an
 - **`subCategory`** / **`subCategoryId`** - e.g. `3 Yıl Ek Garanti` / `1004`.
 - **`variant`** - `{ name, message }` selection rules.
 
-## Example Response (excerpt)
+## Example Response
 
 ``` json
 {
@@ -54,5 +52,15 @@ Top-level wrapper: `{ "isSuccess", "statusCode", "result" }`. The `result` is an
       "subCategoryId": 1004
     }
   ]
+}
+```
+
+## The Response i got 
+``` json
+{
+    "isSuccess": false,
+    "statusCode": 400,
+    "message": "Invalid request: categoryId is required in body, brandId is required in body, sellerId is required in body, sellingPrice is required in body, attributes is required in body",
+    "result": []
 }
 ```

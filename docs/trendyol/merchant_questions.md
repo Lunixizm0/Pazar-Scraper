@@ -18,12 +18,12 @@ GET https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/merc
 
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
-| `fulfilmentType` | string | Yes | Fulfillment type of the listing, e.g. `mp` (marketplace). |
-| `excludeTag` | boolean | Yes | e.g. `false`. |
-| `page` | number | Yes | Zero-based page index (e.g. `0`). |
-| `size` | number | Yes | Questions per page (e.g. `4`). |
+| `fulfilmentType` | string | NO | Fulfillment type of the listing, e.g. `mp` (marketplace). |
+| `excludeTag` | boolean | NO | e.g. `false`. |
+| `page` | number | NO | Zero-based page index (e.g. `0`). |
+| `size` | number | NO | Questions per page (e.g. `4`). |
 | `isMobile` | boolean | Yes | e.g. `false`. |
-| `channelId` | number | Yes | The sales channel identifier. Use `1` for the web channel. |
+| `channelId` | number | NO | The sales channel identifier. Use `1` for the web channel. |
 
 ## Request Headers
 

@@ -14,7 +14,7 @@ GET https://coc-webview.trendyol.com/api/p/monthly-payments/calculated
 | --- | --- | --- | --- |
 | `price` | number | Yes | The total purchase price for which loan offers are calculated (e.g. `10000.0`). |
 | `maxTerm` | number | Yes | The maximum installment term (in months) to include in results. Use a large value like `99999` to retrieve all available terms. |
-| `bankCategoryId` | number | Yes | The category ID of the bank type to filter results. `13` corresponds to participation (Islamic) banks. |
+| `bankCategoryId` | number | NO | The category ID of the bank type to filter results. `13` corresponds to participation (Islamic) banks. |
 
 ## Request Headers
 
