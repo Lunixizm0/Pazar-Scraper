@@ -1,0 +1,28 @@
+{
+  "source": "hepsiburada",
+  "category": "T-Shirt",
+  "name": "Ds Damat Comfort Lacivert %100 Pamuk T-Shirt",
+  "brand": "D'S Damat",
+  "price": "799.00 TL",
+  "currency": "TRY",
+  "url": "https://www.hepsiburada.com/ds-damat-comfort-lacivert-100-pamuk-t-shirt-6hc14ort02005-p-HBCV00008TI2EL",
+  "sku": "HBCV00008TI2EL",
+  "image": "https://productimages.hepsiburada.net/s/777/375/110001035110007.jpg/format:webp",
+  "description": "Ds Damat Comfort Lacivert %100 Pamuk T-Shirt 6HC14ORT02005",
+  "availability": "https://schema.org/InStock",
+  "item_condition": "https://schema.org/NewCondition",
+  "custom_data": {
+    "merchant": "D'S DAMAT",
+    "product_id": "HBC00008TI2LM",
+    "category_path": [
+      "Giyim / Ayakkabı",
+      "Erkek",
+      "Giyim",
+      "T-Shirt"
+    ],
+    "reviews": {
+      "score": 4.7,
+      "count": 80
+    }
+  }
+}

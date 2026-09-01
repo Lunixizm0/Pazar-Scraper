@@ -1,4 +1,4 @@
-# Satışla Birlikte Önerilen Ekstra Ürünler (VAS) THIS SHIT NEEDS UPDATEEEE
+# Satışla Birlikte Önerilen Ekstra Ürünler (VAS)
 
 Retrieves value-added services (VAS) offered alongside a product purchase - e.g. extended warranty / insurance packages with a calculated price, seller, category, and marketing description. This is a `POST` endpoint.
 
@@ -8,13 +8,37 @@ Retrieves value-added services (VAS) offered alongside a product purchase - e.g.
 POST https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/vas/
 ```
 
-## Query Parameters (Known)
+## Query Parameters
 
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | `storefrontId` | number | Yes | e.g. `1`. |
 | `language` | string | Yes | e.g. `tr`. |
 | `channelId` | number | Yes | The sales channel identifier. Use `1` for the web channel. |
+
+## Request Body (required)
+
+All fields are required. Values are extracted from `shared_props["product"]`.
+
+```json
+{
+  "categoryId": 1058,
+  "brandId": 11079,
+  "sellerId": 968,
+  "sellingPrice": 3839,
+  "attributes": [
+    { "key": "Garanti Tipi", "value": "Resmi Distribütör Garantili" }
+  ]
+}
+```
+
+| Field | Source | Description |
+| --- | --- | --- |
+| `categoryId` | `shared_props["product"]["category"]["id"]` | Product category ID. |
+| `brandId` | `shared_props["product"]["brand"]["id"]` | Brand ID. |
+| `sellerId` | `shared_props["product"]["merchantListing"]["merchant"]["id"]` | Top seller/merchant ID. |
+| `sellingPrice` | `shared_props["product"]["merchantListing"]["winnerVariant"]["price"]["sellingPrice"]["value"]` | Current selling price. |
+| `attributes` | `shared_props["product"]["attributes"]` (flattened) | Product attributes. Each entry's `value` must be a **string** (the attribute name), not an object — using `{id, name}` objects causes a `400` deserialization error. |
 
 ## Response
 
@@ -52,15 +76,5 @@ Top-level wrapper: `{ "isSuccess", "statusCode", "result" }`. The `result` is an
       "subCategoryId": 1004
     }
   ]
-}
-```
-
-## The Response i got 
-``` json
-{
-    "isSuccess": false,
-    "statusCode": 400,
-    "message": "Invalid request: categoryId is required in body, brandId is required in body, sellerId is required in body, sellingPrice is required in body, attributes is required in body",
-    "result": []
 }
 ```

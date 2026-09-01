@@ -20,7 +20,7 @@ The storefront gateway's anti-bot checks are bypassed by using the `x-agentname`
 | `x-agentname` | `StorefrontProductGateway` |
 | `x-web-req-source` | `StorefrontProductGateway` |
 | `Origin` | `https://www.trendyol.com` |
-| `Cookie` | `platform=web; AZ_SELECTED=false; storefrontId=1; countryCode=TR; language=tr; csrf-secret=...` |
+| `Cookie` | `platform=web; AZ_SELECTED=false; storefrontId=1; countryCode=TR; language=tr` |
 
 Note: Without `countryCode=TR` the gateway returns `418` ("Required country information is wrong or missing").
 
@@ -63,4 +63,4 @@ curl "https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/re
   -H "x-agentname: StorefrontProductGateway" \
   -H "x-web-req-source: StorefrontProductGateway" \
   -H "Origin: https://www.trendyol.com" \
-  -H "Cookie: platform=web; AZ_SELECTED=false; storefrontId=1; countryCode=TR; language=tr; csrf-secret=..."
+  -H "Cookie: platform=web; AZ_SELECTED=false; storefrontId=1; countryCode=TR; language=tr"

@@ -1,8 +1,9 @@
 import json
 
-import requests
+import requests as _requests
 from bs4 import BeautifulSoup
 
+from scrape.debug import DebugRequests, debug, request_get
 from scrape.utils.trendyol import (
     _extract_first_string,
     _format_price_value,
@@ -10,6 +11,8 @@ from scrape.utils.trendyol import (
     extract_price,
     parse_html,
 )
+
+requests = DebugRequests(_requests)
 
 
 def get_raw_html(url):
@@ -26,7 +29,7 @@ def get_raw_html(url):
         "Sec-Fetch-Site": "none",
         "Sec-Fetch-User": "?1",
     }
-    response = requests.get(url, headers=headers, timeout=20)
+    response = request_get(_requests, url, headers=headers, timeout=20)
     return response
 
 
@@ -37,7 +40,7 @@ def _iter_json_ld_payloads(soup):
             continue
         try:
             payload = json.loads(script_text)
-        except TypeError, json.JSONDecodeError:
+        except (TypeError, json.JSONDecodeError):
             continue
         yield payload
 
@@ -64,7 +67,9 @@ def extract_product_data(soup):
     for payload in _iter_json_ld_payloads(soup):
         product = _extract_product_from_json_ld(payload)
         if product is not None:
+            debug("product_data.found", source="json_ld", provider="hepsiburada")
             return product
+    debug("product_data.missing", source="json_ld", provider="hepsiburada")
     return None
 
 
@@ -82,8 +87,11 @@ def _extract_redux_store(soup):
     if start == -1 or end == -1 or end <= start:
         return None
     try:
-        return json.loads(text[start : end + 1])
-    except TypeError, ValueError:
+        store = json.loads(text[start : end + 1])
+        debug("redux_store.found", provider="hepsiburada")
+        return store
+    except (TypeError, ValueError):
+        debug("redux_store.invalid", provider="hepsiburada")
         return None
 
 
@@ -348,6 +356,7 @@ def _extract_custom_data(product_data, redux_product):
 
 def build_product_dataset(product_data, soup=None):
     if not isinstance(product_data, dict):
+        debug("dataset.skipped", provider="hepsiburada", reason="product_data_missing")
         return {
             "source": "hepsiburada",
             "category": "unknown",
@@ -366,6 +375,7 @@ def build_product_dataset(product_data, soup=None):
 
     redux = _extract_redux_store(soup) if soup is not None else None
     redux_product = _extract_redux_product(redux)
+    debug("dataset.build.start", provider="hepsiburada", redux_product_found=redux_product is not None)
 
     offers = product_data.get("offers")
     if not isinstance(offers, dict):
@@ -377,7 +387,7 @@ def build_product_dataset(product_data, soup=None):
     else:
         brand_name = brand
 
-    return {
+    dataset = {
         "source": "hepsiburada",
         "category": _detect_category(product_data, redux_product),
         "name": _extract_first_string(product_data.get("name")),
@@ -394,10 +404,13 @@ def build_product_dataset(product_data, soup=None):
         "item_condition": offers.get("itemCondition"),
         "custom_data": _extract_custom_data(product_data, redux_product),
     }
+    debug("dataset.build.complete", provider="hepsiburada", populated_fields=sum(value is not None for value in dataset.values()))
+    return dataset
 
 
 def extract_product_dataset(soup, category="unknown", custom_data=None):
     product_data = extract_product_data(soup)
+    debug("dataset.extract", provider="hepsiburada", product_data_found=product_data is not None)
     dataset = build_product_dataset(product_data, soup=soup)
     if category and category != "unknown":
         dataset["category"] = category

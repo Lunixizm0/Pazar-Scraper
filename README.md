@@ -20,7 +20,7 @@ Also includes a **Trendyol API integration** to fetch richer product information
 ## Quick Start
 
 ```bash
-# Install dependencies (uses uv)
+# Install dependencies
 uv sync
 
 # Scrape a Trendyol product
@@ -28,64 +28,25 @@ uv run scrape "https://www.trendyol.com/brand/product-p-id"
 
 # Scrape a Hepsiburada product
 uv run scrape "https://www.hepsiburada.com/product-p-id"
+
+# İşlem adımlarını stderre yazdır
+uv run scrape --debug "https://www.trendyol.com/brand/product-p-id"
+
+# Son JSONu gizle yalnızca debug satırlarını göster
+uv run scrape --debug --no-output "https://www.trendyol.com/brand/product-p-id"
+
+# Son JSONu hem dosyaya hem terminale yaz
+uv run scrape --out product.json "https://www.trendyol.com/brand/product-p-id"
+
+# Terminalde görünen her şeyi (debug dahil) günlük dosyasına da yaz
+uv run scrape --debug --out-std scrape.log "https://www.trendyol.com/brand/product-p-id"
 ```
 
-## Output Example
+`--debug` ağ isteklerini, HTTP durumlarını, HTML/JSON-LD ayrıştırmasını, veri seti oluşturmayı ve Trendyol API zenginleştirmelerini stderr'e yazar. Normal JSON sonuç stdout'ta kalır; bu nedenle çıktı yönlendirmesiyle de uyumludur. `--no-output`, yalnızca nihai JSON sonucunu gizler.
 
-```json
-{
-  "source": "trendyol",
-  "category": "Kulak İçi Bluetooth Kulaklık",
-  "name": "Xiaomi Redmi Buds 8 Pro Siyah Bluetooth Kulakiçi Kulaklık TWS - ANC BT 5.4 (Xiaomi TR Garantili)",
-  "brand": "Xiaomi",
-  "price": "4199.00 TL",
-  "currency": "TRY",
-  "url": "https://www.trendyol.com/xiaomi/redmi-buds-8-pro-siyah-bluetooth-kulakici-kulaklik-tws-anc-bt-5-4-xiaomi-tr-garantili-p-1081766367",
-  "sku": "1081766367",
-  "image": "https://cdn.dsmcdn.com/ty1000319/product/media/images/prod/PIM/20260227/12/a9dc7313-301e-4256-babd-8e0d08ee7623/1_org_zoom.jpg",
-  "description": "long ahh description",
-  "availability": "https://schema.org/InStock",
-  "item_condition": "https://schema.org/NewCondition",
-  "custom_data": {
-    "pattern": "Kulak İçi Bluetooth Kulaklık",
-    "attributes": {
-      "Aktif Gürültü Önleme (ANC)": "Var",
-      "Dokunmatik Kontrol": "Var",
-      "Garanti Tipi": "Resmi Distribütör Garantili",
-      "Suya/Tere Dayanıklılık": "Var",
-      "Mikrofon": "Var",
-      "Bluetooth Versiyon": "5.4",
-      "Garanti Süresi": "2 Yıl",
-      "Çift Telefon Desteği": "Var",
-      "Menşei": "CN",
-      "Tamir Edilebilirlik": "Yetkili Servis ile Tamiri Gerekir."
-    },
-    "reviews": {
-      "score": 4.333333333333333,
-      "count": 54
-    },
-    "listings": [
-      {
-        "merchant": "VATAN BİLGİSAYAR",
-        "price": 4199,
-        "original_price": 4299
-      },
-      {
-        "merchant": "Trendyol",
-        "price": 4458.22,
-        "original_price": 4458.22
-      } And others
-    ],
-    "merchant": "VATAN BİLGİSAYAR",
-    "category_path": [
-      "Elektronik",
-      "Giyilebilir Teknoloji",
-      "Kulaklıklar",
-      "Kulak içi TWS Bluetooth Kulaklık"
-    ]
-  }
-}
-```
+`--out DOSYA` final dataset JSON'unu hem dosyaya hem stdout'a yazar. `--out-std DOSYA`, terminale gelen her şeyi (stdout, debug ve HTTP body dahil) ek olarak günlük dosyasına da yazar. `--no-output`, final JSON'u stdout'tan gizler; `--out` verilmişse JSON yine dosyaya yazılır. Hiçbir çıktı seçeneği verilmezse sonuç, önceki davranışla uyumlu olarak stdout'a yazılır.
+
+## See `docs/trendyol/example.json` and `docs/hepsiburada/example.json` for example output. 
 
 ## Project Structure
 

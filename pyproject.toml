@@ -12,6 +12,7 @@ dependencies = [
 
 [project.scripts]
 scrape = "scrape:main"
+pazar-scraper = "scrape:main"
 
 [tool.ruff]
 lint.ignore = ["F401", "BLE001"]
@@ -23,11 +24,14 @@ reportMissingImports = false
 pythonpath = ["src"]
 
 [tool.uv]
-package = false
+package = true
 
 [build-system]
 requires = ["uv_build>=0.12.7,<0.13.0"]
 build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "scrape"
 
 [dependency-groups]
 dev = [
