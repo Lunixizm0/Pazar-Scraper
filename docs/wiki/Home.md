@@ -4,7 +4,7 @@ Documentation for the internal (storefront) APIs that the Pazar-Scraper project 
 
 ## Trendyol
 
-- [Trendyol API Documentation](trendyol-README) — overview, base URL, common request headers, and the full endpoint list
+- [Trendyol API Documentation](trendyol-README) - overview, base URL, common request headers, and the full endpoint list
 - Exchange rates: [currencies](trendyol-currencies)
 - Credit offers (Cloudflare protected): [kredi-teklifleri](trendyol-kredi_teklifleri)
 - Variants: [slicing-attributes](trendyol-slicing_attributes)
@@ -12,7 +12,7 @@ Documentation for the internal (storefront) APIs that the Pazar-Scraper project 
 
 ## Hepsiburada
 
-- [Hepsiburada API Documentation](hepsiburada-README) — overview, base URL, common request headers, and the full endpoint list
+- [Hepsiburada API Documentation](hepsiburada-README) - overview, base URL, common request headers, and the full endpoint list
 - Product listings: [product-listings](hepsiburada-product_listings)
 - Installment: [installment](hepsiburada-installment)
 - Other merchants: [other-merchants](hepsiburada-other_merchants)

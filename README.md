@@ -8,6 +8,10 @@ Given a product URL from sites, the tool fetches the HTML page, parses embedded 
 
 Also includes **API integrations** to fetch richer product information via each platform's internal storefront APIs (Trendyol and Hepsiburada).
 
+## The Mindset
+
+Anyone can crawl a page and read it. My question here is how the page was built - and that's what this is about. This is first and foremost a research project, not a polished product or a general-purpose data-mining tool. The emphasis is on understanding how large storefronts structure and expose their data - through embedded structured data (JSON-LD, Redux state), the DOM, and internal JSON APIs - and on documenting those findings in a readable, reusable form. The scraper code is a byproduct of that exploration: it exists to make the research tangible and repeatable. Readability, curiosity, and documentation are prioritized over scale or production robustness.
+
 ## Features
 
 - **Trendyol** (`utils/trendyol.py`): extracts product data from JSON-LD, `__envoy__SHARED_PROPS`, and API
@@ -46,7 +50,7 @@ uv run scrape --debug --out-std scrape.log "https://www.trendyol.com/brand/produ
 
 `--out FILE` writes the final dataset JSON to both a file and stdout. `--out-std FILE` additionally writes everything that reaches the terminal (stdout, debug, and HTTP body) to a log file. `--no-output` hides the final JSON from stdout; if `--out` is given the JSON is still written to the file. If no output option is given, the result is written to stdout, consistent with prior behavior.
 
-## See `docs/trendyol-example.json` and `docs/hepsiburada-example.json` for example output.
+### See `docs/trendyol-example.json` and `docs/hepsiburada-example.json` for example output.
 
 ## Project Structure
 
