@@ -18,7 +18,7 @@ GET https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/merc
 
 ## Request Headers
 
-Same header set as the other storefront endpoints (see `review_read.md`).
+Same header set as the other storefront endpoints (see [`review_read.md`](trendyol-review_read)).
 
 ## Response
 

@@ -2,7 +2,7 @@
 
 Retrieves the installment (taksit) payment options for a given product price from Trendyol's storefront consumer-lending service. Returns a summary (zero-interest installments, longest term) plus per-bank installment plans with term, interest rate, monthly payment, and total price.
 
-Note: This is a preferred replacement for the external `coc-webview` endpoint documented in `kredi_teklifleri.md`. The `coc-webview` endpoint sits behind a strict Cloudflare wall (returns 403 for non-browser clients), whereas this storefront `installment` endpoint is reachable with plain `requests`.
+Note: This is a preferred replacement for the external `coc-webview` endpoint documented in [`kredi_teklifleri.md`](trendyol-kredi_teklifleri). The `coc-webview` endpoint sits behind a strict Cloudflare wall (returns 403 for non-browser clients), whereas this storefront `installment` endpoint is reachable with plain `requests`.
 
 ## Endpoint
 
@@ -28,7 +28,7 @@ Most of these values are readily available from the product page itself (price, 
 
 ## Request Headers
 
-Tested successfully with plain `requests` (same header set as `review_read.md`). May intermittently return `429` under burst rate limits; add a small delay between calls.
+Tested successfully with plain `requests` (same header set as [`review_read.md`](trendyol-review_read)). May intermittently return `429` under burst rate limits; add a small delay between calls.
 
 ## Response
 

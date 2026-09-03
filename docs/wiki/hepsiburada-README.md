@@ -27,15 +27,15 @@ Most cookies come from the browser session; in particular, without `hbus_anonymo
 
 | # | Endpoint | Method | Purpose | Parameters |
 | --- | --- | --- | --- | --- |
-| 1 | [`/api/v1/product/listings/{sku}`](product_listings.md) | GET | Seller listings (price, stock, rating, shipping) | `sku` |
-| 2 | [`/api/v1/withoutAffordability`](without_affordability.md) | POST | Discounted price + campaign | JSON body (`userId`, `product`, `affordabilityRequest`) |
-| 3 | [`/api/v1/product/installment`](installment.md) | GET | Installment / credit options | `maxInstallment`, `amount`, `definitionId`, `paymentTag`, `sku`, `merchantId`, `taxRatio` |
-| 4 | [`/api/v1/otherMerchants`](other_merchants.md) | POST | Other sellers (competitive price) | JSON body (`userId`, `product.otherMerchants[]`) |
-| 5 | [`/api/v1/paymentOptions`](payment_options.md) | POST | Payment options | JSON body (`userId`, `affordabilityRequest`) |
-| 6 | [`shipping-external.../duedateapi/querymodel/withtext/v2`](shipping_due_date.md) | POST | Shipping delivery date | JSON body (`queryModels[]`) |
-| 7 | [`api-asktoseller.../products/{sku}/merchants/accept-questions`](ask_to_seller.md) | GET | Seller question status + rating | `sku` |
-| 8 | [`customer-voltran-gw.../api/vas/evaluate`](vas.md) | POST | Value-added services / insurance suggestions (VAS) | JSON body (`definationName`, `merchantName`, `price`, `rootCategories[]`, `sku`) |
-| - | [`jsonld.md`](jsonld.md) | - | HTML-embedded structured data | - |
+| 1 | [`/api/v1/product/listings/{sku}`](hepsiburada-product_listings) | GET | Seller listings (price, stock, rating, shipping) | `sku` |
+| 2 | [`/api/v1/withoutAffordability`](hepsiburada-without_affordability) | POST | Discounted price + campaign | JSON body (`userId`, `product`, `affordabilityRequest`) |
+| 3 | [`/api/v1/product/installment`](hepsiburada-installment) | GET | Installment / credit options | `maxInstallment`, `amount`, `definitionId`, `paymentTag`, `sku`, `merchantId`, `taxRatio` |
+| 4 | [`/api/v1/otherMerchants`](hepsiburada-other_merchants) | POST | Other sellers (competitive price) | JSON body (`userId`, `product.otherMerchants[]`) |
+| 5 | [`/api/v1/paymentOptions`](hepsiburada-payment_options) | POST | Payment options | JSON body (`userId`, `affordabilityRequest`) |
+| 6 | [`shipping-external.../duedateapi/querymodel/withtext/v2`](hepsiburada-shipping_due_date) | POST | Shipping delivery date | JSON body (`queryModels[]`) |
+| 7 | [`api-asktoseller.../products/{sku}/merchants/accept-questions`](hepsiburada-ask_to_seller) | GET | Seller question status + rating | `sku` |
+| 8 | [`customer-voltran-gw.../api/vas/evaluate`](hepsiburada-vas) | POST | Value-added services / insurance suggestions (VAS) | JSON body (`definationName`, `merchantName`, `price`, `rootCategories[]`, `sku`) |
+| - | [`jsonld`](hepsiburada-jsonld) | - | HTML-embedded structured data | - |
 
 ## Accessibility
 

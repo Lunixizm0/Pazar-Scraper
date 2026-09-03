@@ -46,7 +46,7 @@ uv run scrape --debug --out-std scrape.log "https://www.trendyol.com/brand/produ
 
 `--out FILE` writes the final dataset JSON to both a file and stdout. `--out-std FILE` additionally writes everything that reaches the terminal (stdout, debug, and HTTP body) to a log file. `--no-output` hides the final JSON from stdout; if `--out` is given the JSON is still written to the file. If no output option is given, the result is written to stdout, consistent with prior behavior.
 
-## See `docs/trendyol/example.json` and `docs/hepsiburada/example.json` for example output. 
+## See `docs/trendyol-example.json` and `docs/hepsiburada-example.json` for example output.
 
 ## Project Structure
 
@@ -66,37 +66,39 @@ tests/
 └── hepsiburada/
     ├── test_hepsiburada.py          # Live integration tests
     └── get_hepsiburada_products.py  # Fetches URLs from Hepsiburada homepage
-docs/
-├── trendyol/
-│   ├── README.md                    # API documentation index
-│   ├── component_data.md            # Component-read endpoint
-│   ├── kredi_teklifleri.md          # Credit/installment endpoint (external)
-│   ├── review_read.md               # Reviews + AI summary
-│   ├── delivery_date.md             # Delivery dates
-│   ├── installment.md               # Bank installment options
-│   ├── merchant_questions.md        # Q&A
-│   ├── seller_acceptance.md         # Seller question acceptance
-│   ├── slicing_attributes.md        # Variants/colors
-│   ├── seller_store.md              # Seller store info
-│   ├── sellerstore_follow.md        # Follower count
-│   ├── social_proof.md              # Favorites
-│   ├── video_content.md             # Product videos
-│   ├── stamps.md                    # Badges/stamps
-│   ├── stickers.md                  # Stickers
-│   ├── currencies.md                # Exchange rates
-│   ├── product_eligibility.md       # Eligibility
-│   └── vas.md                       # Value-added services
-└── hepsiburada/
-    ├── README.md                    # API documentation index
-    ├── product_listings.md          # Seller listings
-    ├── without_affordability.md     # Discounted price + campaign
-    ├── installment.md               # Installment / credit options
-    ├── other_merchants.md           # Other sellers
-    ├── payment_options.md           # Payment options
-    ├── shipping_due_date.md         # Shipping delivery date
-    ├── ask_to_seller.md             # Seller question status
-    ├── vas.md                       # Value-added services
-    └── jsonld.md                    # HTML-embedded structured data
+docs/ # i know this is messy but i do this for basic github wiki integration (probably fix that later)
+├── wiki/
+│   ├── Home.md                      # Wiki landing page (linked from GitHub Wiki)
+│   ├── trendyol-README.md           # Trendyol API documentation index
+│   ├── trendyol-component_data.md   # Component-read endpoint
+│   ├── trendyol-kredi_teklifleri.md # Credit/installment endpoint (external)
+│   ├── trendyol-review_read.md      # Reviews + AI summary
+│   ├── trendyol-delivery_date.md    # Delivery dates
+│   ├── trendyol-installment.md      # Bank installment options
+│   ├── trendyol-merchant_questions.md   # Q&A
+│   ├── trendyol-seller_acceptance.md    # Seller question acceptance
+│   ├── trendyol-slicing_attributes.md   # Variants/colors
+│   ├── trendyol-seller_store.md         # Seller store info
+│   ├── trendyol-sellerstore_follow.md   # Follower count
+│   ├── trendyol-social_proof.md         # Favorites
+│   ├── trendyol-video_content.md        # Product videos
+│   ├── trendyol-stamps.md               # Badges/stamps
+│   ├── trendyol-stickers.md             # Stickers
+│   ├── trendyol-currencies.md           # Exchange rates
+│   ├── trendyol-product_eligibility.md  # Eligibility
+│   ├── trendyol-vas.md                  # Value-added services
+│   ├── hepsiburada-README.md            # Hepsiburada API documentation index
+│   ├── hepsiburada-product_listings.md  # Seller listings
+│   ├── hepsiburada-without_affordability.md  # Discounted price + campaign
+│   ├── hepsiburada-installment.md       # Installment / credit options
+│   ├── hepsiburada-other_merchants.md   # Other sellers
+│   ├── hepsiburada-payment_options.md   # Payment options
+│   ├── hepsiburada-shipping_due_date.md # Shipping delivery date
+│   ├── hepsiburada-ask_to_seller.md     # Seller question status
+│   ├── hepsiburada-vas.md               # Value-added services
+│   └── hepsiburada-jsonld.md            # HTML-embedded structured data
+├── trendyol-example.json           # Example raw Trendyol output
+└── hepsiburada-example.json        # Example raw Hepsiburada output
 ```
 
 ## Requirements
@@ -124,15 +126,19 @@ uv run ruff check src/ tests/
 
 ## Discovered Storefront APIs
 
-`docs/trendyol/` contains documentation for 18 internal Trendyol endpoints discovered via browser network inspection:
+API documentation lives in `docs/wiki/` as flattened, prefixed Markdown pages and is published to the GitHub Wiki automatically on push (see `.github/workflows/publish-wiki.yml`). `docs/wiki/Home.md` links everything together.
+
+**Trendyol** (`docs/wiki/trendyol-*.md`) documents 18 internal endpoints discovered via browser network inspection:
 
 - review-read, component-read, delivery-date, installment, merchant-questions, seller-acceptance, currencies, stickers, video-content, complete-the-look
 - slicing-attributes, social-proof, seller-store, sellerstore-follow, stamps, product-eligibility, coc-webview credit endpoint
 
-See `docs/trendyol/README.md` for full endpoint list, headers, and accessibility matrix.
+See `docs/wiki/trendyol-README.md` for the full endpoint list, headers, and accessibility matrix.
 
-`docs/hepsiburada/` contains documentation for the Hepsiburada PDP storefront APIs and JSON-LD structured data:
+**Hepsiburada** (`docs/wiki/hepsiburada-*.md`) documents the PDP storefront APIs and JSON-LD structured data:
 
 - product listings, withoutAffordability (discounted price + campaign), installment, other merchants, payment options, shipping due date, ask-to-seller, VAS
 
-For Hepsiburada, Akamai `_abck` protection may require browser-session cookies; see `docs/hepsiburada/README.md` for the accessibility details.
+See `docs/wiki/hepsiburada-README.md` for details. For Hepsiburada, Akamai `_abck` protection may require browser-session cookies; see that page for the accessibility details.
+
+Example raw outputs live at `docs/trendyol-example.json` and `docs/hepsiburada-example.json`.

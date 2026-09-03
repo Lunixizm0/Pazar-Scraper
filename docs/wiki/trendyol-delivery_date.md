@@ -24,7 +24,7 @@ GET https://apigw.trendyol.com/discovery-storefront-trproductgw-service/api/deli
 
 ## Request Headers
 
-Tested successfully with plain `requests` using the same header set as other storefront endpoints (see `review_read.md` for the full list). The `Cookie` must include `countryCode=TR`.
+Tested successfully with plain `requests` using the same header set as other storefront endpoints (see [`review_read.md`](trendyol-review_read) for the full list). The `Cookie` must include `countryCode=TR`.
 
 ## Response
 
