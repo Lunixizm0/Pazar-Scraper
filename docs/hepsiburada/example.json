@@ -1,28 +1,671 @@
 {
   "source": "hepsiburada",
-  "category": "T-Shirt",
-  "name": "Ds Damat Comfort Lacivert %100 Pamuk T-Shirt",
-  "brand": "D'S Damat",
-  "price": "799.00 TL",
+  "category": "Kulak Üstü Kulaklık",
+  "name": "Razer BlackShark V2 Pro 2023 Kablosuz Gaming Kulaklık, Beyaz",
+  "brand": "Razer",
+  "price": "7890.00 TL",
   "currency": "TRY",
-  "url": "https://www.hepsiburada.com/ds-damat-comfort-lacivert-100-pamuk-t-shirt-6hc14ort02005-p-HBCV00008TI2EL",
-  "sku": "HBCV00008TI2EL",
-  "image": "https://productimages.hepsiburada.net/s/777/375/110001035110007.jpg/format:webp",
-  "description": "Ds Damat Comfort Lacivert %100 Pamuk T-Shirt 6HC14ORT02005",
+  "url": "https://www.hepsiburada.com/razer-blackshark-v2-pro-2023-kablosuz-gaming-kulaklik-beyaz-rz04-04530200-r3m1-p-HBCV00004MW5Q6",
+  "sku": "HBCV00004MW5Q6",
+  "image": "https://productimages.hepsiburada.net/s/435/375/110000467783749.jpg/format:webp",
+  "description": "Razer BlackShark V2 Pro 2023 Kablosuz Gaming Kulaklık, Beyaz RZ04-04530200-R3M1",
   "availability": "https://schema.org/InStock",
   "item_condition": "https://schema.org/NewCondition",
+  "reviews": {
+    "score": 4.6,
+    "count": 82
+  },
+  "vas": [
+    {
+      "suggested_sku": "HBCV00003BI5EQ",
+      "title": "Kazaen Zarar Sigortası",
+      "sub_title": "1 yıl geçerli kırılma, sıvı teması ve hırsızlık",
+      "description": "Kazaen Kırılma ve Hırsızlık Sigortası Poliçe başlangıç tarihinizden itibaren 1 (bir) yıl boyunca meydana gelen ani ve beklenmedik durum karşısında cihazın kaza ile hasara uğraması (kırılma , sıvı teması), kapalı bir ortamdan zorlama, şiddet, tehdit, yaralama, öldürme ve/veya anahtar uydurma yöntemi ile çalınması (hırsızlık) sebebiyle oluşacak zararları kapsamaktadır. Kapsam dahilindeki durumlar neticesinde hasarlanan ürünün tamir edilemez veya tamir edilmesi uygun bulunmaz ise fatura bedeli (ürünün ilk satın alma tutarı) üzerinden %30 kesinti yapılarak GIG Sigorta tarafından ödeme gerçekleştirilir.",
+      "name_mobile": "Koruma Paketi",
+      "price": 1059.0,
+      "brand": "Hepsiburada",
+      "listing_id": "4a13e5b0-325c-47de-b369-93db616d327d",
+      "logo": "https://images.hepsiburada.net/cac/content/images/vas/hb_koruma_paketi.png",
+      "detail_link": "https://www.hepsiburada.com/staticPage/960255753068575",
+      "static_page": "https://www.hepsiburada.com/staticpage/51866692389872",
+      "items": [
+        {
+          "title": "SEPETİNİ OLUŞTUR",
+          "description": "Seçtiğiniz ürünle birlikte sigorta paketini sepetinize ekleyin.",
+          "image": "https://images.hepsiburada.net/assets/storefront/vas/sepet_bottomsheet.png"
+        },
+        {
+          "title": "KAYIT OL",
+          "description": "Sigorta paketi ve eklediğiniz ürününüzün satın alım işlemini tamamlayın.",
+          "image": "https://images.hepsiburada.net/assets/storefront/vas/randevu_bottomsheet.png"
+        },
+        {
+          "title": "İŞLEM TAMAM",
+          "description": "Siparişiniz teslim edildikten sonra poliçeniz oluşturularak sizinle paylaşılacaktır. Cihazınızı güvenle kullanabilirsiniz.",
+          "image": "https://images.hepsiburada.net/assets/storefront/vas/tamam_bottomsheet.png"
+        }
+      ]
+    }
+  ],
+  "installments": {
+    "card_amount": 84522,
+    "card_installment": 12,
+    "loan_amount": 129300,
+    "loan_installment": 12
+  },
   "custom_data": {
-    "merchant": "D'S DAMAT",
-    "product_id": "HBC00008TI2LM",
+    "merchant": "Nethouse",
+    "product_id": "HBC00004Q2IO3",
     "category_path": [
-      "Giyim / Ayakkabı",
-      "Erkek",
-      "Giyim",
-      "T-Shirt"
+      "Bilgisayar Sistemleri ve Ekipmanları",
+      "Çevre Birimleri",
+      "Ses Ve Görüntü Ürünleri",
+      "Kulaklık",
+      "Kulak Üstü Kulaklık"
+    ],
+    "listings": [
+      {
+        "merchant": "EMC&BİLİSİM&TEKN",
+        "price": 8069.05,
+        "original_price": 8069.05
+      },
+      {
+        "merchant": "Razer Shop",
+        "price": 9349.15,
+        "original_price": 9349.15
+      }
     ],
     "reviews": {
-      "score": 4.7,
-      "count": 80
+      "score": 4.6,
+      "count": 82
+    },
+    "api_data": {
+      "listings": [
+        {
+          "merchantId": "b38d2d14-6ccf-4fc8-a543-c85dfab931f3",
+          "listingId": "4b68fa2f-a82e-447a-be0b-482779957a5a",
+          "merchantName": "Nethouse",
+          "freeShipping": false,
+          "fastShipping": false,
+          "availableWarehouses": [],
+          "campaignIds": [],
+          "isBundle": false,
+          "shipmentDay": 0,
+          "shipmentType": "businessDays",
+          "isSalable": true,
+          "womanEntrepreneur": false,
+          "paymentTag": "hepsifinans-limiti-ile-alabilecegin-urunler,visa-okula-donus-kampanyasi-ekipman-ve-aksesuar,bilgisayarlarda-cok-satanlar,secili-kulak-ustu-kulakliklarda-sepette-15-indirim,buyuk-finale-ozel-secili-bilgisayar-urunlerinde-sepette-5-indirim,kredi-karti-3-taksit-5-tag,kulaklik-urunlerinde-sepette-5-net-indirim,razer-urunlerinde-firsatlar,secili-bilgisayar-urunlerinde-sepette-5-indirim,secili-bilgisayar-urunlerinde-sepette-5-net-indirim,secili-kulaklik-urunlerinde-sepette-5-net-indirim",
+          "consumerFinanceTagList": "",
+          "price": {
+            "value": 7890,
+            "currency": 0
+          },
+          "originalPrice": {
+            "value": 9282.35,
+            "currency": 0
+          },
+          "minimumPrice": {
+            "value": 7990,
+            "currency": 0
+          },
+          "minimumPrices": [
+            {
+              "name": "10",
+              "value": 7990
+            },
+            {
+              "name": "30",
+              "value": 7990
+            },
+            {
+              "name": "non-segmented-price",
+              "value": 7890
+            }
+          ],
+          "vatExcludedPrice": {
+            "value": 6575,
+            "currency": 0
+          },
+          "unitPrice": null,
+          "logo": "https://images.hepsiburada.net/assets/marketplace/b38d2d14-6ccf-4fc8-a543-c85dfab931f3-67626.png",
+          "ratingSummary": {
+            "lifetimeRating": 9.6,
+            "ratingQuantity": 426
+          },
+          "merchantCity": "İSTANBUL",
+          "merchantCountry": "TÜRKİYE",
+          "merchantLabels": null,
+          "merchantInfo": {
+            "id": "b38d2d14-6ccf-4fc8-a543-c85dfab931f3",
+            "name": "Nethouse",
+            "logo": "https://images.hepsiburada.net/assets/marketplace/b38d2d14-6ccf-4fc8-a543-c85dfab931f3-67626.png",
+            "ratingSummary": {
+              "lifetimeRating": 9.6,
+              "ratingQuantity": 426
+            },
+            "merchantLabels": null,
+            "urlPostfix": "nethouse"
+          },
+          "prices": [
+            {
+              "formattedPrice": "7.990,00",
+              "value": 7990,
+              "currency": 0,
+              "discountRate": 0
+            },
+            {
+              "formattedPrice": "7.890,00",
+              "value": 7890,
+              "currency": 0,
+              "discountRate": 1
+            }
+          ],
+          "discountRate": 1,
+          "warehouseId": "BIRINCIL",
+          "quantity": 357,
+          "buyboxOrder": 1,
+          "tagList": [
+            {
+              "tagId": "hepsifinans-limiti-ile-alabilecegin-urunler"
+            },
+            {
+              "tagId": "visa-okula-donus-kampanyasi-ekipman-ve-aksesuar"
+            },
+            {
+              "tagId": "bilgisayarlarda-cok-satanlar"
+            },
+            {
+              "tagId": "secili-kulak-ustu-kulakliklarda-sepette-15-indirim"
+            },
+            {
+              "tagId": "buyuk-finale-ozel-secili-bilgisayar-urunlerinde-sepette-5-indirim"
+            },
+            {
+              "tagId": "kredi-karti-3-taksit-5-tag"
+            },
+            {
+              "tagId": "kulaklik-urunlerinde-sepette-5-net-indirim"
+            },
+            {
+              "tagId": "razer-urunlerinde-firsatlar"
+            },
+            {
+              "tagId": "secili-bilgisayar-urunlerinde-sepette-5-indirim"
+            },
+            {
+              "tagId": "secili-bilgisayar-urunlerinde-sepette-5-net-indirim"
+            },
+            {
+              "tagId": "secili-kulaklik-urunlerinde-sepette-5-net-indirim"
+            }
+          ],
+          "jetDeliveryCities": [],
+          "isFulfilledByHB": false,
+          "shippingProfileId": "fec0b417-17c0-4693-9367-58465a84cd02",
+          "inStockDate": null,
+          "minimumPurchasableQuantity": 0,
+          "buyboxAlternatives": [
+            {
+              "algorithmName": "mdc_model_v2",
+              "buyboxOrder": 1
+            }
+          ],
+          "customizationConfiguration": [],
+          "isCampaignParticipationClosed": false,
+          "aiBasedShipmentDay": 1
+        },
+        {
+          "merchantId": "ed81e61b-1bdc-4f7d-8bdf-73ecae0f7334",
+          "listingId": "c8300905-6f5c-41fc-832b-f21447d3e4e3",
+          "merchantName": "EMC&BİLİSİM&TEKN",
+          "freeShipping": false,
+          "fastShipping": false,
+          "availableWarehouses": [],
+          "campaignIds": [],
+          "isBundle": false,
+          "shipmentDay": 0,
+          "shipmentType": "businessDays",
+          "isSalable": true,
+          "womanEntrepreneur": false,
+          "paymentTag": "hepsifinans-limiti-ile-alabilecegin-urunler,visa-okula-donus-kampanyasi-ekipman-ve-aksesuar,bilgisayarlarda-cok-satanlar,secili-kulak-ustu-kulakliklarda-sepette-15-indirim,kredi-karti-3-taksit-5-tag",
+          "consumerFinanceTagList": "",
+          "price": {
+            "value": 8069.05,
+            "currency": 0
+          },
+          "originalPrice": {
+            "value": 9493,
+            "currency": 0
+          },
+          "minimumPrice": {
+            "value": 8105,
+            "currency": 0
+          },
+          "minimumPrices": [
+            {
+              "name": "10",
+              "value": 8105
+            },
+            {
+              "name": "30",
+              "value": 7699.75
+            },
+            {
+              "name": "non-segmented-price",
+              "value": 8069.05
+            }
+          ],
+          "vatExcludedPrice": {
+            "value": 6724.21,
+            "currency": 0
+          },
+          "unitPrice": null,
+          "logo": "https://images.hepsiburada.net/assets/marketplace/ed81e61b-1bdc-4f7d-8bdf-73ecae0f7334-14523.png",
+          "ratingSummary": {
+            "lifetimeRating": 9.5,
+            "ratingQuantity": 51
+          },
+          "merchantCity": "İZMİR",
+          "merchantCountry": "TÜRKİYE",
+          "merchantLabels": null,
+          "merchantInfo": {
+            "id": "ed81e61b-1bdc-4f7d-8bdf-73ecae0f7334",
+            "name": "EMC&BİLİSİM&TEKN",
+            "logo": "https://images.hepsiburada.net/assets/marketplace/ed81e61b-1bdc-4f7d-8bdf-73ecae0f7334-14523.png",
+            "ratingSummary": {
+              "lifetimeRating": 9.5,
+              "ratingQuantity": 51
+            },
+            "merchantLabels": null,
+            "urlPostfix": "emc-bilisim-tekn"
+          },
+          "prices": [
+            {
+              "formattedPrice": "8.069,05",
+              "value": 8069.05,
+              "currency": 0,
+              "discountRate": 0
+            }
+          ],
+          "discountRate": 0,
+          "warehouseId": "BIRINCIL",
+          "quantity": 50,
+          "buyboxOrder": 2,
+          "tagList": [
+            {
+              "tagId": "hepsifinans-limiti-ile-alabilecegin-urunler"
+            },
+            {
+              "tagId": "visa-okula-donus-kampanyasi-ekipman-ve-aksesuar"
+            },
+            {
+              "tagId": "bilgisayarlarda-cok-satanlar"
+            },
+            {
+              "tagId": "secili-kulak-ustu-kulakliklarda-sepette-15-indirim"
+            },
+            {
+              "tagId": "kredi-karti-3-taksit-5-tag"
+            }
+          ],
+          "jetDeliveryCities": [],
+          "isFulfilledByHB": false,
+          "shippingProfileId": "869cd042-e2cf-42fa-ade3-052b4b39911b",
+          "inStockDate": null,
+          "minimumPurchasableQuantity": 0,
+          "buyboxAlternatives": [
+            {
+              "algorithmName": "mdc_model_v2",
+              "buyboxOrder": 2
+            }
+          ],
+          "customizationConfiguration": [],
+          "isCampaignParticipationClosed": false,
+          "aiBasedShipmentDay": 1
+        },
+        {
+          "merchantId": "5e37b43a-c379-4d1c-86fa-a07391712694",
+          "listingId": "54b07e98-28fa-47f1-aaf3-2e79b5c6f346",
+          "merchantName": "Razer Shop",
+          "freeShipping": false,
+          "fastShipping": false,
+          "availableWarehouses": [],
+          "campaignIds": [],
+          "isBundle": false,
+          "shipmentDay": 1,
+          "shipmentType": "businessDays",
+          "isSalable": true,
+          "womanEntrepreneur": false,
+          "paymentTag": "hepsifinans-limiti-ile-alabilecegin-urunler,visa-okula-donus-kampanyasi-ekipman-ve-aksesuar,bilgisayarlarda-cok-satanlar,secili-kulak-ustu-kulakliklarda-sepette-15-indirim,kredi-karti-9-taksit",
+          "consumerFinanceTagList": "",
+          "price": {
+            "value": 9349.15,
+            "currency": 0
+          },
+          "originalPrice": {
+            "value": 10999,
+            "currency": 0
+          },
+          "minimumPrice": {
+            "value": 9349.15,
+            "currency": 0
+          },
+          "minimumPrices": [
+            {
+              "name": "10",
+              "value": 9349.15
+            },
+            {
+              "name": "30",
+              "value": 8881.69
+            },
+            {
+              "name": "non-segmented-price",
+              "value": 9349.15
+            }
+          ],
+          "vatExcludedPrice": {
+            "value": 7790.96,
+            "currency": 0
+          },
+          "unitPrice": null,
+          "logo": "https://images.hepsiburada.net/assets/marketplace/5e37b43a-c379-4d1c-86fa-a07391712694-50244.png",
+          "ratingSummary": {
+            "lifetimeRating": 9.6,
+            "ratingQuantity": 4
+          },
+          "merchantCity": "İSTANBUL",
+          "merchantCountry": "TÜRKİYE",
+          "merchantLabels": null,
+          "merchantInfo": {
+            "id": "5e37b43a-c379-4d1c-86fa-a07391712694",
+            "name": "Razer Shop",
+            "logo": "https://images.hepsiburada.net/assets/marketplace/5e37b43a-c379-4d1c-86fa-a07391712694-50244.png",
+            "ratingSummary": {
+              "lifetimeRating": 9.6,
+              "ratingQuantity": 4
+            },
+            "merchantLabels": null,
+            "urlPostfix": "razer-shop"
+          },
+          "prices": [
+            {
+              "formattedPrice": "9.349,15",
+              "value": 9349.15,
+              "currency": 0,
+              "discountRate": 0
+            }
+          ],
+          "discountRate": 0,
+          "warehouseId": "BIRINCIL",
+          "quantity": 357,
+          "buyboxOrder": 3,
+          "tagList": [
+            {
+              "tagId": "hepsifinans-limiti-ile-alabilecegin-urunler"
+            },
+            {
+              "tagId": "visa-okula-donus-kampanyasi-ekipman-ve-aksesuar"
+            },
+            {
+              "tagId": "bilgisayarlarda-cok-satanlar"
+            },
+            {
+              "tagId": "secili-kulak-ustu-kulakliklarda-sepette-15-indirim"
+            },
+            {
+              "tagId": "kredi-karti-9-taksit"
+            }
+          ],
+          "jetDeliveryCities": [],
+          "isFulfilledByHB": false,
+          "shippingProfileId": "3926dd4f-4087-4c2e-9031-4d32a9c80ef5",
+          "inStockDate": null,
+          "minimumPurchasableQuantity": 0,
+          "buyboxAlternatives": [
+            {
+              "algorithmName": "mdc_model_v2",
+              "buyboxOrder": 3
+            }
+          ],
+          "customizationConfiguration": [],
+          "isCampaignParticipationClosed": false,
+          "aiBasedShipmentDay": 1
+        },
+        {
+          "merchantId": "3df4da4b-84bb-4277-8c91-952339d23d94",
+          "listingId": "1ea4e95b-6835-4a85-8836-d392ec8879ff",
+          "merchantName": "Hyrox Bilişim",
+          "freeShipping": false,
+          "fastShipping": false,
+          "availableWarehouses": [],
+          "campaignIds": [],
+          "isBundle": false,
+          "shipmentDay": 1,
+          "shipmentType": "businessDays",
+          "isSalable": true,
+          "womanEntrepreneur": false,
+          "paymentTag": "hepsifinans-limiti-ile-alabilecegin-urunler,visa-okula-donus-kampanyasi-ekipman-ve-aksesuar,bilgisayarlarda-cok-satanlar,secili-kulak-ustu-kulakliklarda-sepette-15-indirim,kredi-karti-9-taksit",
+          "consumerFinanceTagList": "",
+          "price": {
+            "value": 9774.15,
+            "currency": 0
+          },
+          "originalPrice": {
+            "value": 11499,
+            "currency": 0
+          },
+          "minimumPrice": {
+            "value": 9774.15,
+            "currency": 0
+          },
+          "minimumPrices": [
+            {
+              "name": "10",
+              "value": 9774.15
+            },
+            {
+              "name": "30",
+              "value": 9285.44
+            },
+            {
+              "name": "non-segmented-price",
+              "value": 9774.15
+            }
+          ],
+          "vatExcludedPrice": {
+            "value": 8145.13,
+            "currency": 0
+          },
+          "unitPrice": null,
+          "logo": "https://images.hepsiburada.net/assets/marketplace/3df4da4b-84bb-4277-8c91-952339d23d94-96564.png",
+          "ratingSummary": {
+            "lifetimeRating": 9.4,
+            "ratingQuantity": 0
+          },
+          "merchantCity": "İSTANBUL",
+          "merchantCountry": "TÜRKİYE",
+          "merchantLabels": null,
+          "merchantInfo": {
+            "id": "3df4da4b-84bb-4277-8c91-952339d23d94",
+            "name": "Hyrox Bilişim",
+            "logo": "https://images.hepsiburada.net/assets/marketplace/3df4da4b-84bb-4277-8c91-952339d23d94-96564.png",
+            "ratingSummary": {
+              "lifetimeRating": 9.4,
+              "ratingQuantity": 0
+            },
+            "merchantLabels": null,
+            "urlPostfix": "hyrox-bilisim"
+          },
+          "prices": [
+            {
+              "formattedPrice": "9.774,15",
+              "value": 9774.15,
+              "currency": 0,
+              "discountRate": 0
+            }
+          ],
+          "discountRate": 0,
+          "warehouseId": "BIRINCIL",
+          "quantity": 2,
+          "buyboxOrder": 4,
+          "tagList": [
+            {
+              "tagId": "hepsifinans-limiti-ile-alabilecegin-urunler"
+            },
+            {
+              "tagId": "visa-okula-donus-kampanyasi-ekipman-ve-aksesuar"
+            },
+            {
+              "tagId": "bilgisayarlarda-cok-satanlar"
+            },
+            {
+              "tagId": "secili-kulak-ustu-kulakliklarda-sepette-15-indirim"
+            },
+            {
+              "tagId": "kredi-karti-9-taksit"
+            }
+          ],
+          "jetDeliveryCities": [],
+          "isFulfilledByHB": false,
+          "shippingProfileId": "95a4a08e-6269-11ec-98ba-025041000001",
+          "inStockDate": null,
+          "minimumPurchasableQuantity": 0,
+          "buyboxAlternatives": [
+            {
+              "algorithmName": "mdc_model_v2",
+              "buyboxOrder": 4
+            }
+          ],
+          "customizationConfiguration": [],
+          "isCampaignParticipationClosed": false,
+          "aiBasedShipmentDay": null
+        }
+      ],
+      "installment": {
+        "card_amount": 84522,
+        "card_installment": 12,
+        "loan_amount": 129300,
+        "loan_installment": 12
+      },
+      "ask_to_seller": {
+        "question_count": 18,
+        "merchants": [
+          {
+            "merchant": "Hyrox Bilişim",
+            "rating": 9.4
+          },
+          {
+            "merchant": "Razer Shop",
+            "rating": 9.6
+          },
+          {
+            "merchant": "Nethouse",
+            "rating": 9.6
+          },
+          {
+            "merchant": "EMC&BİLİSİM&TEKN",
+            "rating": 9.5
+          }
+        ]
+      },
+      "affordability": {
+        "campaigns": {
+          "free_shipping_campaigns": [
+            {
+              "name": "300 TL üzeri kargo bedava",
+              "condition_amount": 300,
+              "end_date": "2029-12-31T23:59:00+03:00"
+            }
+          ]
+        }
+      },
+      "other_merchants": [
+        {
+          "merchant": "EMC&BİLİSİM&TEKN",
+          "merchant_id": "ed81e61b-1bdc-4f7d-8bdf-73ecae0f7334",
+          "price": {
+            "price": 7890
+          },
+          "coupon_count": 0
+        }
+      ],
+      "shipping": {
+        "due_date": "04.09.2026",
+        "due_text": "dakika içinde sipariş verirsen bugün kargoda",
+        "checkout_due_text": "Bugün Kargoda",
+        "shipment_time_text": "<b>15 saat 23dk</b> içinde sipariş verirsen bugün kargoda",
+        "cargo_firm_id": 21,
+        "cut_off_time": 16,
+        "delivery_options": [
+          {
+            "name": "Bugün kargoda",
+            "text": "<b>15 saat 23dk</b> içinde sipariş verirsen bugün kargoda",
+            "type": "StandardDelivery",
+            "cargo_firm_id": 21,
+            "image_url": "https://images.hepsiburada.net/shipping/assets/cargo-logo/21.png"
+          }
+        ]
+      },
+      "payment_options": [
+        {
+          "title": "Hepsitaksit",
+          "text": "Kartsız taksitle al",
+          "payment_type": 4,
+          "is_cash_price": false,
+          "icon_url": "https://images.hepsiburada.net/banners/s/1/102-102/frame_480958487_(1)133978133130451497.png"
+        },
+        {
+          "title": "Kredi Kartı ile",
+          "text": "Peşin fiyatına taksitle al",
+          "payment_type": 3,
+          "is_cash_price": false,
+          "icon_url": "https://images.hepsiburada.net/banners/s/1/102-102/Frame_480958489133964450653288297.png"
+        },
+        {
+          "title": "Alışveriş Kredisi",
+          "text": "Kartsız {0} taksit",
+          "payment_type": 2,
+          "is_cash_price": false,
+          "icon_url": "https://images.hepsiburada.net/banners/s/1/102-102/Frame_480958487133964450652144409.png"
+        },
+        {
+          "payment_type": 1,
+          "is_cash_price": false
+        }
+      ],
+      "vas": [
+        {
+          "suggested_sku": "HBCV00003BI5EQ",
+          "title": "Kazaen Zarar Sigortası",
+          "sub_title": "1 yıl geçerli kırılma, sıvı teması ve hırsızlık",
+          "description": "Kazaen Kırılma ve Hırsızlık Sigortası Poliçe başlangıç tarihinizden itibaren 1 (bir) yıl boyunca meydana gelen ani ve beklenmedik durum karşısında cihazın kaza ile hasara uğraması (kırılma , sıvı teması), kapalı bir ortamdan zorlama, şiddet, tehdit, yaralama, öldürme ve/veya anahtar uydurma yöntemi ile çalınması (hırsızlık) sebebiyle oluşacak zararları kapsamaktadır. Kapsam dahilindeki durumlar neticesinde hasarlanan ürünün tamir edilemez veya tamir edilmesi uygun bulunmaz ise fatura bedeli (ürünün ilk satın alma tutarı) üzerinden %30 kesinti yapılarak GIG Sigorta tarafından ödeme gerçekleştirilir.",
+          "name_mobile": "Koruma Paketi",
+          "price": 1059.0,
+          "brand": "Hepsiburada",
+          "listing_id": "4a13e5b0-325c-47de-b369-93db616d327d",
+          "logo": "https://images.hepsiburada.net/cac/content/images/vas/hb_koruma_paketi.png",
+          "detail_link": "https://www.hepsiburada.com/staticPage/960255753068575",
+          "static_page": "https://www.hepsiburada.com/staticpage/51866692389872",
+          "items": [
+            {
+              "title": "SEPETİNİ OLUŞTUR",
+              "description": "Seçtiğiniz ürünle birlikte sigorta paketini sepetinize ekleyin.",
+              "image": "https://images.hepsiburada.net/assets/storefront/vas/sepet_bottomsheet.png"
+            },
+            {
+              "title": "KAYIT OL",
+              "description": "Sigorta paketi ve eklediğiniz ürününüzün satın alım işlemini tamamlayın.",
+              "image": "https://images.hepsiburada.net/assets/storefront/vas/randevu_bottomsheet.png"
+            },
+            {
+              "title": "İŞLEM TAMAM",
+              "description": "Siparişiniz teslim edildikten sonra poliçeniz oluşturularak sizinle paylaşılacaktır. Cihazınızı güvenle kullanabilirsiniz.",
+              "image": "https://images.hepsiburada.net/assets/storefront/vas/tamam_bottomsheet.png"
+            }
+          ]
+        }
+      ]
     }
   }
 }

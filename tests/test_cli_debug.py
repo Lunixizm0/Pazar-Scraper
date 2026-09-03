@@ -15,8 +15,8 @@ def test_debug_and_no_output_show_only_debug(monkeypatch, capsys):
 
     captured = capsys.readouterr()
     assert captured.out == ""
-    assert "[debug] cli.start" in captured.err
-    assert "[debug] cli.complete" in captured.err
+    assert "[INFO ] cli.start" in captured.err
+    assert "[INFO ] cli.complete" in captured.err
 
 
 def test_debug_keeps_final_json_on_stdout(monkeypatch, capsys):
@@ -27,7 +27,7 @@ def test_debug_keeps_final_json_on_stdout(monkeypatch, capsys):
 
     captured = capsys.readouterr()
     assert json.loads(captured.out) == {"url": "https://example.test/product"}
-    assert "[debug] cli.start" in captured.err
+    assert "[INFO ] cli.start" in captured.err
 
 
 def test_http_body_requires_debug(monkeypatch):
@@ -54,9 +54,8 @@ def test_http_body_is_written_to_stderr(capsys):
 
     captured = capsys.readouterr()
     assert captured.out == ""
-    assert "[debug] http.body.start" in captured.err
+    assert "[http.body]" in captured.err
     assert '"answer": 42' in captured.err
-    assert "[debug] http.body.end" in captured.err
 
 
 def test_out_writes_json_to_file_and_stdout(monkeypatch, capsys, tmp_path):
@@ -115,7 +114,7 @@ def test_no_output_hides_stdout_but_still_writes_out_file(monkeypatch, capsys, t
 
     captured = capsys.readouterr()
     assert captured.out == ""
-    assert "[debug] output.file_written" in captured.err
+    assert "[INFO ] output.file_written" in captured.err
     assert json.loads(destination.read_text(encoding="utf-8")) == {
         "url": "https://example.test/product"
     }
@@ -141,6 +140,6 @@ def test_out_std_captures_debug_but_no_output_hides_dataset(monkeypatch, capsys,
     captured = capsys.readouterr()
     log = destination.read_text(encoding="utf-8")
     assert captured.out == ""
-    assert "[debug] cli.start" in captured.err
-    assert "[debug] cli.start" in log
+    assert "[INFO ] cli.start" in captured.err
+    assert "[INFO ] cli.start" in log
     assert '"url"' not in log

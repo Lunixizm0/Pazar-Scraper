@@ -6,7 +6,7 @@ import requests as _requests
 from bs4 import BeautifulSoup
 
 from scrape.dataset import ProductDataset
-from scrape.debug import DebugRequests, debug, request_get
+from scrape.debug import DebugRequests, debug, error, info, request_get, warn
 
 requests = DebugRequests(_requests)
 
@@ -97,7 +97,7 @@ def get_product_descriptions_from_api(product_id):
 
         return None
     except Exception as e:
-        debug("api.error", api="product_descriptions", error=f"{type(e).__name__}: {e}")
+        error("api.error", api="product_descriptions", error=f"{type(e).__name__}: {e}")
         return None
 
 
@@ -109,7 +109,7 @@ def get_reviews_from_api(product_id, page=0, page_size=5):
         response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
         return response.json() if response.status_code == 200 else None
     except Exception as e:
-        debug("api.error", api="reviews", error=f"{type(e).__name__}: {e}")
+        error("api.error", api="reviews", error=f"{type(e).__name__}: {e}")
         return None
 
 
@@ -121,7 +121,7 @@ def get_delivery_date_from_api(content_id, item_number, winner_listing_id):
         response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
         return response.json() if response.status_code == 200 else None
     except Exception as e:
-        debug("api.error", api="delivery_date", error=f"{type(e).__name__}: {e}")
+        error("api.error", api="delivery_date", error=f"{type(e).__name__}: {e}")
         return None
 
 
@@ -370,7 +370,7 @@ def get_vas_from_api(product_id=None, storefront_id=1, language="tr", shared_pro
         response = requests.post(url, params=params, json=payload, headers=get_common_api_headers(), timeout=20)
         return response.json() if response.status_code == 200 else None
     except Exception as e:
-        debug("api.error", api="vas", error=f"{type(e).__name__}: {e}")
+        error("api.error", api="vas", error=f"{type(e).__name__}: {e}")
         return None
 
 
@@ -408,7 +408,7 @@ def extract_product_data(soup):
             debug("product_data.found", source="json_ld", match="offers_and_name")
             return payload
 
-    debug("product_data.missing", source="json_ld")
+    warn("product_data.missing", source="json_ld")
     return None
 
 
@@ -992,13 +992,13 @@ def _sp_delivery(shared_props):
 
 def _safe_api_call(fn, *args, **kwargs):
     api_name = getattr(fn, "__name__", str(fn))
-    debug("api.builder.start", builder=api_name)
+    info("api.builder.start", builder=api_name)
     try:
         result = fn(*args, **kwargs)
-        debug("api.builder.complete", builder=api_name, available=result is not None)
+        info("api.builder.complete", builder=api_name, available=result is not None)
         return result
     except Exception as e:
-        debug("api.builder.error", builder=api_name, error=f"{type(e).__name__}: {e}")
+        error("api.builder.error", builder=api_name, error=f"{type(e).__name__}: {e}")
         return None
 
 
@@ -1056,7 +1056,7 @@ def _build_vas(product_data, shared_props):
         return None
     result = data.get("result")
     if not isinstance(result, list):
-        debug("api.builder.skip", builder="_build_vas", reason="result_not_a_list")
+        warn("api.builder.skip", builder="_build_vas", reason="result_not_a_list")
         return None
     offers = []
     for offer in result:
@@ -1079,7 +1079,7 @@ def _build_vas(product_data, shared_props):
         if entry:
             offers.append(entry)
     if not offers:
-        debug("api.builder.skip", builder="_build_vas", reason="no_usable_offers")
+        warn("api.builder.skip", builder="_build_vas", reason="no_usable_offers")
         return None
     return offers
 
@@ -1368,7 +1368,7 @@ def _build_social_proof(product_data, shared_props):
 def _build_video(product_data, shared_props):
     video_id = _sp_video_id(shared_props)
     if video_id is None:
-        debug("api.builder.skip", builder="_build_video", reason="video_id_missing")
+        warn("api.builder.skip", builder="_build_video", reason="video_id_missing")
         return None
     data = _safe_api_call(get_video_content_from_api, video_id)
     if not isinstance(data, dict):
@@ -1389,7 +1389,7 @@ def _build_video(product_data, shared_props):
 def _build_stickers(product_data, shared_props):
     sticker_ids = _sp_sticker_ids(shared_props)
     if sticker_ids is None:
-        debug("api.builder.skip", builder="_build_stickers", reason="sticker_ids_missing")
+        warn("api.builder.skip", builder="_build_stickers", reason="sticker_ids_missing")
         return None
     if isinstance(sticker_ids, (list, tuple)):
         sticker_ids = ",".join(str(x) for x in sticker_ids)
@@ -1420,11 +1420,11 @@ def _build_stamps(product_data, shared_props):
         tag_ids = ",".join(str(x) for x in tag_ids)
     data = _safe_api_call(get_stamps_from_api, tag_ids)
     if not isinstance(data, dict):
-        debug("api.builder.skip", builder="_build_stamps", reason="response_not_an_object")
+        warn("api.builder.skip", builder="_build_stamps", reason="response_not_an_object")
         return None
     result = data.get("result")
     if not isinstance(result, dict) or not result:
-        debug("api.builder.skip", builder="_build_stamps", reason="result_empty_or_not_an_object")
+        warn("api.builder.skip", builder="_build_stamps", reason="result_empty_or_not_an_object")
         return None
     stamps = []
     for info in result.values():
@@ -1442,7 +1442,7 @@ def _build_stamps(product_data, shared_props):
                     }
                 )
     if not stamps:
-        debug("api.builder.skip", builder="_build_stamps", reason="no_stamp_url_in_response")
+        warn("api.builder.skip", builder="_build_stamps", reason="no_stamp_url_in_response")
         return None
     return stamps
 
@@ -1483,7 +1483,7 @@ def build_product_dataset(
     product_data, category="unknown", custom_data=None, soup=None
 ):
     if not isinstance(product_data, dict):
-        debug("dataset.skipped", provider="trendyol", reason="product_data_missing")
+        warn("dataset.skipped", provider="trendyol", reason="product_data_missing")
         return None
 
     shared_props = _extract_shared_props(soup) if soup is not None else None

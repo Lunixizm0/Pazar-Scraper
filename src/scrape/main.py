@@ -7,7 +7,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from scrape.dataset import ProductDataset
-from scrape.debug import debug, set_debug
+from scrape.debug import debug, error, info, set_debug, warn
 from scrape.utils.hepsiburada import (
     extract_product_dataset as extract_hepsiburada_dataset,
 )
@@ -36,17 +36,17 @@ class _Tee:
 def detect_provider(url: str) -> str:
     hostname = urlparse(url).netloc.lower()
     if "trendyol.com" in hostname:
-        debug("provider.detected", provider="trendyol", hostname=hostname)
+        info("provider.detected", provider="trendyol", hostname=hostname)
         return "trendyol"
     if "hepsiburada.com" in hostname:
-        debug("provider.detected", provider="hepsiburada", hostname=hostname)
+        info("provider.detected", provider="hepsiburada", hostname=hostname)
         return "hepsiburada"
-    debug("provider.unsupported", hostname=hostname, url=url)
+    error("provider.unsupported", hostname=hostname, url=url)
     raise ValueError(f"Unsupported site: {url}")
 
 
 def scrape_trendyol(url: str) -> dict:
-    debug("scrape.start", provider="trendyol", url=url)
+    info("scrape.start", provider="trendyol", url=url)
     response = get_raw_html(url)
     debug("page.status", provider="trendyol", status=response.status_code)
     if response.status_code != 200:
@@ -58,12 +58,12 @@ def scrape_trendyol(url: str) -> dict:
         raise RuntimeError(f"Trendyol product data not found: {url}")
 
     payload = dataset.to_dict() if isinstance(dataset, ProductDataset) else json.loads(json.dumps(dataset, ensure_ascii=False))
-    debug("scrape.complete", provider="trendyol", populated_fields=sum(value is not None for value in payload.values()))
+    info("scrape.complete", provider="trendyol", populated_fields=sum(value is not None for value in payload.values()))
     return payload
 
 
 def scrape_hepsiburada(url: str) -> dict:
-    debug("scrape.start", provider="hepsiburada", url=url)
+    info("scrape.start", provider="hepsiburada", url=url)
     response = get_hepsiburada_html(url)
     debug("page.status", provider="hepsiburada", status=response.status_code)
     if response.status_code != 200:
@@ -75,13 +75,13 @@ def scrape_hepsiburada(url: str) -> dict:
         raise RuntimeError(f"Hepsiburada product data not found: {url}")
 
     payload = dataset.to_dict() if isinstance(dataset, ProductDataset) else json.loads(json.dumps(dataset, ensure_ascii=False))
-    debug("scrape.complete", provider="hepsiburada", populated_fields=sum(value is not None for value in payload.values()))
+    info("scrape.complete", provider="hepsiburada", populated_fields=sum(value is not None for value in payload.values()))
     return payload
 
 
 def _dispatch(url: str) -> dict:
     provider = detect_provider(url)
-    debug("dispatch", provider=provider)
+    info("dispatch", provider=provider)
     if provider == "trendyol":
         return scrape_trendyol(url)
     if provider == "hepsiburada":
@@ -115,7 +115,7 @@ def main() -> None:
             stack.enter_context(redirect_stderr(_Tee(sys.stderr, log_file)))
 
         set_debug(args.debug, http_body=args.http_body)
-        debug(
+        info(
             "cli.start",
             url=args.url,
             no_output=args.no_output,
@@ -133,17 +133,17 @@ def main() -> None:
             output = json.dumps(payload, ensure_ascii=False, indent=2)
             if args.out:
                 args.out.write_text(f"{output}\n", encoding="utf-8")
-                debug("output.file_written", path=str(args.out), bytes=len(output.encode("utf-8")))
+                info("output.file_written", path=str(args.out), bytes=len(output.encode("utf-8")))
             if not args.no_output:
                 print(output)
-            debug(
+            info(
                 "cli.complete",
                 stdout_written=not args.no_output,
                 dataset_file_written=args.out is not None,
                 terminal_log_written=args.out_std is not None,
             )
         except Exception as exc:
-            debug("cli.error", error=f"{type(exc).__name__}: {exc}")
+            error("cli.error", error=f"{type(exc).__name__}: {exc}")
             raise SystemExit(str(exc)) from exc
 
 
