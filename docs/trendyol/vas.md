@@ -38,7 +38,7 @@ All fields are required. Values are extracted from `shared_props["product"]`.
 | `brandId` | `shared_props["product"]["brand"]["id"]` | Brand ID. |
 | `sellerId` | `shared_props["product"]["merchantListing"]["merchant"]["id"]` | Top seller/merchant ID. |
 | `sellingPrice` | `shared_props["product"]["merchantListing"]["winnerVariant"]["price"]["sellingPrice"]["value"]` | Current selling price. |
-| `attributes` | `shared_props["product"]["attributes"]` (flattened) | Product attributes. Each entry's `value` must be a **string** (the attribute name), not an object — using `{id, name}` objects causes a `400` deserialization error. |
+| `attributes` | `shared_props["product"]["attributes"]` (flattened) | Product attributes. Each entry's `value` must be a **string** (the attribute name), not an object - using `{id, name}` objects causes a `400` deserialization error. |
 
 ## Response
 

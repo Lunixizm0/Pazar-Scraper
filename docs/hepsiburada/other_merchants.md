@@ -99,4 +99,4 @@ The following response shows the merchant info returned in the `result.product` 
 
 - Unlike `product/listings`, this endpoint carries the **competitive price and campaigns of other sellers**.
 - For single-seller products, `otherMerchants` only contains the main merchant; for multi-merchant products it provides comparative price data.
-- `minimumPriceForNLastDays` — the seller's lowest price over the last N days (370.69).
+- `minimumPriceForNLastDays` - the seller's lowest price over the last N days (370.69).

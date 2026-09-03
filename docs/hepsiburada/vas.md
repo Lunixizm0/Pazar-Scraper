@@ -128,5 +128,5 @@ Top-level container fields:
 
 - `price` is an integer/decimal value **in TL** (not kurus/cent).
 - `rootCategories` is a list of **int** values taken from the product's category hierarchy (redux `rootCategoryList`, etc.).
-- `definationName` ("defination" — Hepsiburada's spelling) is the product definition name; the scraped product's `definition_name` value is used.
+- `definationName` ("defination" - Hepsiburada's spelling) is the product definition name; the scraped product's `definition_name` value is used.
 - For products without a VAS suggestion (`suggestedProducts: []`) the field is omitted from the output, so the top-level `vas` field stays `null`.

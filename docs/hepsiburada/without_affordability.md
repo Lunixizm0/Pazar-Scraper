@@ -75,14 +75,14 @@ Top-level container: `{ "statusCode": 200, "data": { "result": { "product": {...
 
 ### `result.product.promoData.data` sub-structure
 
-- `campaignEvaluateResult.evaluateResult` — `{ campaignText, campaigns[], discountedPrice }`
+- `campaignEvaluateResult.evaluateResult` - `{ campaignText, campaigns[], discountedPrice }`
   - Each `campaigns[]`: `{ id, name, totalDiscount, type, discountValue, conditionAmount, conditionQuantity, awardQuantity, isPremium, isAdditionalBenefit, endDateTime }`
   - Example: `id: 95592497`, `name: "ELART satıcılı seçili ürünlerde %30 indirim"`, `totalDiscount: 282.6`, `discountValue: 30`, `endDateTime: "2026-09-30T23:59:00+03:00"`
-- `campaigns.campaignTabDetailList.discountCampaignList[]` — discount campaigns
-- `campaigns.campaignTabDetailList.freeShippingCampaignList[]` — free shipping campaigns
+- `campaigns.campaignTabDetailList.discountCampaignList[]` - discount campaigns
+- `campaigns.campaignTabDetailList.freeShippingCampaignList[]` - free shipping campaigns
   - Example: `{ id: 24055363, name: "300 TL üzeri kargo bedava", type: 6, conditionAmount: 300 }`
-- `campaigns.campaignTabDetailList.totalCampaignCount` — `2`
-- `nextEligibleCampaign` — `{ campaignId, isPremiumCampaign, text }`
+- `campaigns.campaignTabDetailList.totalCampaignCount` - `2`
+- `nextEligibleCampaign` - `{ campaignId, isPremiumCampaign, text }`
 
 ## Example (structural)
 

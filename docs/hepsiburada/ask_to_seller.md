@@ -8,7 +8,7 @@ Returns which of the product's sellers can be asked questions and those sellers'
 GET https://api-asktoseller.hepsiburada.com/api/v2.0/products/{sku}/merchants/accept-questions
 ```
 
-`{sku}` — the product's SKU code (e.g. `HBCV0000EBN5K8`). It lives on a different host (`api-asktoseller.hepsiburada.com`).
+`{sku}` - the product's SKU code (e.g. `HBCV0000EBN5K8`). It lives on a different host (`api-asktoseller.hepsiburada.com`).
 
 ## Request Headers
 
@@ -64,6 +64,6 @@ GET https://api-asktoseller.hepsiburada.com/api/v2.0/products/HBCV0000EBN5K8/mer
 
 ## Notes
 
-- `merchants[].rating` (9.6) — the merchant's overall rating; it differs from the product's own rating (JSON-LD `aggregateRating.ratingValue` = 5).
-- `questionCount` — the number of questions asked about the product so far.
+- `merchants[].rating` (9.6) - the merchant's overall rating; it differs from the product's own rating (JSON-LD `aggregateRating.ratingValue` = 5).
+- `questionCount` - the number of questions asked about the product so far.
 - This endpoint also provides info such as the merchant rating (rating) that overlaps with the `ratingSummary.lifetimeRating` in `product/listings`.

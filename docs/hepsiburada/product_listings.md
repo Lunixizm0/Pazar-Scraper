@@ -8,7 +8,7 @@ Returns price, stock, shipping, merchant rating, and price history data for all 
 GET https://www.hepsiburada.com/api/v1/product/listings/{sku}
 ```
 
-`{sku}` — the product's SKU code (e.g. `HBCV0000EBN5K8`).
+`{sku}` - the product's SKU code (e.g. `HBCV0000EBN5K8`).
 
 ## Request Headers
 
@@ -76,13 +76,13 @@ Note: `price.value` is 942 TL in the base currency; the currency amount `0` = TL
 
 ### Other fields
 
-- `paymentTag` — comma-separated campaign/tag list (very long; same content as `tagList`).
-- `tagList` — tag array of the form `[{ "tagId": "1200-300-home-kuponu" }, ...]`.
-- `buyboxAlternatives` — buybox algorithm information.
-- `jetDeliveryCities` — jet delivery cities (may be empty).
-- `shippingProfileId` — shipping profile UUID.
-- `customizationConfiguration` — may be an empty array.
-- `pbs` — long Akamai protection token (meaningless for the scraper).
+- `paymentTag` - comma-separated campaign/tag list (very long; same content as `tagList`).
+- `tagList` - tag array of the form `[{ "tagId": "1200-300-home-kuponu" }, ...]`.
+- `buyboxAlternatives` - buybox algorithm information.
+- `jetDeliveryCities` - jet delivery cities (may be empty).
+- `shippingProfileId` - shipping profile UUID.
+- `customizationConfiguration` - may be an empty array.
+- `pbs` - long Akamai protection token (meaningless for the scraper).
 
 ## Example
 

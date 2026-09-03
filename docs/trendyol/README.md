@@ -51,8 +51,6 @@ All 18 endpoints work with plain `requests`/curl when using the header combinati
 | 17 | [`vas/`](vas.md) `/vas/` (POST) | VAS/insurance | `storefrontId`, `language`, `channelId` (JSON body) |
 | 18 | [`kredi-teklifleri`](kredi_teklifleri.md) `coc-webview/.../monthly-payments/calculated` | Credit (external) | Cloudflare protected (returns 403) |
 
-*asterisk: installment endpoint may intermittently return `429` under burst rate limits; add a short delay between calls.*
-
 ## Example: Real working curl request
 
 ```

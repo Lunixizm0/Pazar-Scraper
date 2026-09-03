@@ -4,8 +4,8 @@ This directory documents the internal APIs that Hepsiburada's product detail pag
 
 The data sources fall into two groups:
 
-1. **JSON-LD** — structured data embedded in the HTML (shelf price, name, SKU, brand, review count, etc.).
-2. **HTTP APIs** — internal services called by the page's JavaScript (discounted price, campaigns, installments, other sellers, payment, shipping, seller question status).
+1. **JSON-LD** - structured data embedded in the HTML (shelf price, name, SKU, brand, review count, etc.).
+2. **HTTP APIs** - internal services called by the page's JavaScript (discounted price, campaigns, installments, other sellers, payment, shipping, seller question status).
 
 ## Common Request Headers
 
@@ -35,7 +35,7 @@ Most cookies come from the browser session; in particular, without `hbus_anonymo
 | 6 | [`shipping-external.../duedateapi/querymodel/withtext/v2`](shipping_due_date.md) | POST | Shipping delivery date | JSON body (`queryModels[]`) |
 | 7 | [`api-asktoseller.../products/{sku}/merchants/accept-questions`](ask_to_seller.md) | GET | Seller question status + rating | `sku` |
 | 8 | [`customer-voltran-gw.../api/vas/evaluate`](vas.md) | POST | Value-added services / insurance suggestions (VAS) | JSON body (`definationName`, `merchantName`, `price`, `rootCategories[]`, `sku`) |
-| — | [`jsonld.md`](jsonld.md) | — | HTML-embedded structured data | — |
+| - | [`jsonld.md`](jsonld.md) | - | HTML-embedded structured data | - |
 
 ## Accessibility
 

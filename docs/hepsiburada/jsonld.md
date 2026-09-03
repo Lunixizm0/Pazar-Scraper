@@ -2,8 +2,8 @@
 
 Hepsiburada's product detail page (PDP) exposes two separate JSON-LD blocks inside `script[type="application/ld+json"]` tags:
 
-1. **WebPage + Product (main block)** — page and product information.
-2. **Review list** — product reviews inside a single JSON array.
+1. **WebPage + Product (main block)** - page and product information.
+2. **Review list** - product reviews inside a single JSON array.
 
 Both blocks were captured live from the following test product:
 `https://www.hepsiburada.com/elart-riva-100-pamuk-cift-kisilik-pike-sari-p-HBCV0000EBN5K8` (sku: `HBCV0000EBN5K8`).
@@ -63,7 +63,7 @@ The root object has `@type: WebPage` and contains a `@type: Product` within its 
 | `description` | string | Meta description |
 | `url` | string | Canonical product URL |
 | `inLanguage` | string | `tr-tr` |
-| `breadcrumb` | object | `BreadcrumbList` — category crumbs via `itemListElement[]` (6 levels) |
+| `breadcrumb` | object | `BreadcrumbList` - category crumbs via `itemListElement[]` (6 levels) |
 | `relatedLink` | array | Category and brand links |
 
 ## Block 2: Review List
