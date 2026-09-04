@@ -1,5 +1,5 @@
 [project]
-name = "pazar-scraper"
+name = "Storefront-Research"
 version = "1.0.0"
 description = "Python web scraper for extracting structured product data from Turkish e-commerce platforms"
 readme = "README.md"

@@ -1,8 +1,8 @@
-# Pazar-Scraper Documentation
+# Storefront-Research Documentation
 
-Documentation for the internal (storefront) APIs that the Pazar-Scraper project discovers and consumes.
+Documentation for the internal (storefront) APIs that the Storefront-Research project discovers and consumes.
 
-## Trendyol
+## Trendyol (summary)
 
 - [Trendyol API Documentation](trendyol-README) - overview, base URL, common request headers, and the full endpoint list
 - Exchange rates: [currencies](trendyol-currencies)
@@ -13,7 +13,7 @@ Documentation for the internal (storefront) APIs that the Pazar-Scraper project 
 - Embedded state (`__envoy__SHARED_PROPS`): [shared-props](trendyol-shared_props)
 - Product description (component-read API): [description](trendyol-description)
 
-## Hepsiburada
+## Hepsiburada (summary)
 
 - [Hepsiburada API Documentation](hepsiburada-README) - overview, base URL, common request headers, and the full endpoint list
 - Product listings: [product-listings](hepsiburada-product_listings)
