@@ -35,10 +35,10 @@ class _Tee:
 
 def detect_provider(url: str) -> str:
     hostname = urlparse(url).netloc.lower()
-    if "trendyol.com" in hostname:
+    if "www.trendyol.com" == hostname:
         info("provider.detected", provider="trendyol", hostname=hostname)
         return "trendyol"
-    if "hepsiburada.com" in hostname:
+    if "www.hepsiburada.com" == hostname:
         info("provider.detected", provider="hepsiburada", hostname=hostname)
         return "hepsiburada"
     error("provider.unsupported", hostname=hostname, url=url)

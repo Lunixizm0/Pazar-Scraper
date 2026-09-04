@@ -3,7 +3,7 @@ name = "pazar-scraper"
 version = "1.0.0"
 description = "Python web scraper for extracting structured product data from Turkish e-commerce platforms"
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.13"
 dependencies = [
     "bs4>=0.0.2",
     "lxml>=6.1.2",
@@ -12,7 +12,6 @@ dependencies = [
 
 [project.scripts]
 scrape = "scrape:main"
-pazar-scraper = "scrape:main"
 
 [tool.ruff]
 lint.ignore = ["F401", "BLE001"]
