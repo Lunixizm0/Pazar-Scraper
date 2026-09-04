@@ -12,20 +12,20 @@
   "availability": "https://schema.org/InStock",
   "item_condition": "https://schema.org/NewCondition",
   "reviews": {
-    "score": 4.3,
-    "total_rating_count": 103,
-    "ai_summary": "• Birçok yorumda ürünün ses kalitesinin iyi olduğu, özellikle müzik dinleme deneyiminin tatmin edici olduğu belirtiliyor.\n• Sıkça, ANC (aktif gürültü engelleme) özelliğinin başarılı olduğu ve gürültülü ortamlarda etkili olduğu ifade ediliyor.\n• Birkaç yorumda ürünün tasarımı ve malzeme kalitesiyle ilgili olumlu geri bildirimler yer alıyor.\n• Birkaç kullanıcı, ürünün şarj süresinin beklentilerinin altında olduğunu ve hızlı şarj özelliğinin beklendiği gibi çalışmadığını belirtiyor.\n• Birkaç yorumda ürünün bağlantı sorunları yaşadığı, özellikle bazı cihazlarla uyumsuzluk veya kopma sorunları olduğu ifade ediliyor.",
+    "score": 4.4,
+    "total_rating_count": 107,
+    "ai_summary": "• Birçok yorumda ses kalitesinin dengeli, net ve tatmin edici olduğu belirtilmiş.\n• Gürültü engelleme (ANC) özelliğinin güçlü olduğu ve dış sesleri büyük oranda azalttığı sıkça vurgulanmış.\n• Kulaklık tasarımının şık ve premium bir hissiyat sunduğu, kutu şarjının ışık göstergesiyle kullanım kolaylığı sağladığı ifade edilmiş.\n• Şarj süresinin yeterli olduğu, hızlı şarj desteğiyle pratiklik sunduğu ve uzun süreli kullanım sağladığı belirtilmiş.\n• Kulaklıkta yaşanan bağlantı sorunları ve yazılımsal eksiklikler bazı kullanıcılar tarafından dile getirilmiş.",
     "reviews": [
-      {
-        "rating": 5,
-        "comment": "Yeni kulaklık oldukça iyi ayrıca istediğim renkte de geldi buradan satıcıya teşekkür ediyorum",
-        "seller": "Xiaomi Resmi Mağazası",
-        "trusted": true
-      },
       {
         "rating": 5,
         "comment": "Harika bir kulaklık, hiç pişman etmedi. Trendyol ekibine çook teşekkürler 🖤🖤",
         "seller": "Trendyol",
+        "trusted": true
+      },
+      {
+        "rating": 5,
+        "comment": "Yeni kulaklık oldukça iyi ayrıca istediğim renkte de geldi buradan satıcıya teşekkür ediyorum",
+        "seller": "Xiaomi Resmi Mağazası",
         "trusted": true
       },
       {
@@ -658,14 +658,14 @@
       "Tamir Edilebilirlik": "Yetkili Servis ile Tamiri Gerekir."
     },
     "reviews": {
-      "score": 4.333333333333333,
-      "count": 54
+      "score": 4.355140186915888,
+      "count": 56
     },
     "listings": [
       {
         "merchant": "Trendyol",
         "price": 3839,
-        "original_price": 4452.74
+        "original_price": 4458.22
       },
       {
         "merchant": "Xiaomi Resmi Mağazası",
@@ -674,13 +674,18 @@
       },
       {
         "merchant": "VATAN BİLGİSAYAR",
-        "price": 4999,
-        "original_price": 4999
+        "price": 4499,
+        "original_price": 4499
+      },
+      {
+        "merchant": "CarrefourSA",
+        "price": 4599,
+        "original_price": 5348.99
       },
       {
         "merchant": "ARVONX GLOBAL",
         "price": 5930.45,
-        "original_price": 6977
+        "original_price": 5930.45
       },
       {
         "merchant": "EnSonu",
@@ -697,16 +702,10 @@
     ],
     "api_data": {
       "delivery": {
-        "delivery_start": "2026-09-02T18:12:12",
-        "delivery_end": "2026-09-05T18:12:12",
-        "cargo_start": "2026-09-02T23:59:00",
-        "cargo_companies": [],
-        "fast_delivery_options": [
-          {
-            "type": "TOMORROW_SHIPPING",
-            "dailyCutoffHour": "00:00"
-          }
-        ]
+        "delivery_start": "2026-09-05T20:36:06",
+        "delivery_end": "2026-09-09T20:36:06",
+        "cargo_start": "2026-09-05T23:59:00",
+        "cargo_companies": []
       },
       "merchant_questions": {
         "total": 2,
@@ -728,7 +727,7 @@
       "seller_store": {
         "name": "Trendyol",
         "score": 9.3,
-        "product_count": 33605,
+        "product_count": 33826,
         "official_name": "DSM GRUP DANIŞMANLIK İLETİŞİM VE SATIŞ TİCARET ANONİM ŞİRKETİ",
         "store_url": "https://www.trendyol.com/magaza/trendyol-m-968",
         "ranking": "Spor Outdoor Kategorisinde",
@@ -771,7 +770,7 @@
         ]
       },
       "seller_follower": {
-        "count": 5325647,
+        "count": 5333080,
         "text": "5,3M",
         "has_coupon": false
       },
@@ -800,12 +799,12 @@
               "product_count": 1
             },
             {
-              "name": "Beyaz",
+              "name": "Mavi",
               "is_selected": false,
               "product_count": 1
             },
             {
-              "name": "Mavi",
+              "name": "Beyaz",
               "is_selected": false,
               "product_count": 1
             }
@@ -819,7 +818,7 @@
       "currencies": [
         {
           "name": "EUR",
-          "rate": 55.8652
+          "rate": 55.9713
         },
         {
           "name": "TRY",
@@ -827,47 +826,47 @@
         },
         {
           "name": "USD",
-          "rate": 48.1745
+          "rate": 48.2238
         },
         {
           "name": "PKR",
-          "rate": 0.17271
+          "rate": 0.17291
         },
         {
           "name": "MAD",
-          "rate": 5.1767
+          "rate": 5.1565
         },
         {
           "name": "NGN",
-          "rate": 0.03606
+          "rate": 0.03649
         },
         {
           "name": "PLN",
-          "rate": 12.92
+          "rate": 12.9561
         },
         {
           "name": "CHF",
-          "rate": 59.4436
+          "rate": 59.4529
         },
         {
           "name": "DKK",
-          "rate": 7.4621
+          "rate": 7.4761
         },
         {
           "name": "GBP",
-          "rate": 65.1261
+          "rate": 64.9761
         },
         {
           "name": "SEK",
-          "rate": 5.0016
+          "rate": 5.0074
         },
         {
           "name": "CZK",
-          "rate": 2.318
+          "rate": 2.3148
         },
         {
           "name": "EGP",
-          "rate": 0.94768
+          "rate": 0.94772
         },
         {
           "name": "HRK",
@@ -875,39 +874,39 @@
         },
         {
           "name": "CAD",
-          "rate": 34.6262
+          "rate": 34.8706
         },
         {
           "name": "RON",
-          "rate": 10.5647
+          "rate": 10.5951
         },
         {
           "name": "HUF",
-          "rate": 0.15346
+          "rate": 0.1526
         },
         {
           "name": "SAR",
-          "rate": 12.831
+          "rate": 12.8425
         },
         {
           "name": "AED",
-          "rate": 13.043
+          "rate": 13.0562
         },
         {
           "name": "PHP",
-          "rate": 0.77261
+          "rate": 0.77202
         },
         {
           "name": "SGD",
-          "rate": 37.8878
+          "rate": 38.0671
         },
         {
           "name": "THB",
-          "rate": 1.4539
+          "rate": 1.4633
         },
         {
           "name": "MYR",
-          "rate": 11.9766
+          "rate": 11.9429
         },
         {
           "name": "AZN",
@@ -915,23 +914,23 @@
         },
         {
           "name": "QAR",
-          "rate": 13.1416
+          "rate": 13.1551
         },
         {
           "name": "KWD",
-          "rate": 155.9645
+          "rate": 156.2003
         },
         {
           "name": "OMR",
-          "rate": 125.2462
+          "rate": 125.3678
         },
         {
           "name": "BHD",
-          "rate": 127.8905
+          "rate": 128.0213
         },
         {
           "name": "RUB",
-          "rate": 0.55327
+          "rate": 0.55136
         },
         {
           "name": "BGN",
@@ -939,15 +938,15 @@
         },
         {
           "name": "MDL",
-          "rate": 2.8115
+          "rate": 2.7884
         },
         {
           "name": "RSD",
-          "rate": 0.47641
+          "rate": 0.47761
         },
         {
           "name": "UAH",
-          "rate": 1.0846
+          "rate": 1.0808
         }
       ]
     }

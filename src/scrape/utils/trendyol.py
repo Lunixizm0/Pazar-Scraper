@@ -143,7 +143,7 @@ def get_installment_from_api(amount, category_id, group_tag_ids, total_amount=No
         response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
         return response.json() if response.status_code == 200 else None
     except Exception as e:
-        print(f"Error fetching installment API: {e}")
+        error("api.error", api="installment", error=str(e))
         return None
 
 
@@ -162,7 +162,7 @@ def get_merchant_questions_from_api(content_id, page=0, size=4, fulfilment_type=
         response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
         return response.json() if response.status_code == 200 else None
     except Exception as e:
-        print(f"Error fetching merchant questions API: {e}")
+        error("api.error", api="merchant_questions", error=str(e))
         return None
 
 
@@ -174,7 +174,7 @@ def get_seller_acceptance_from_api(seller_id):
         response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
         return response.json() if response.status_code == 200 else None
     except Exception as e:
-        print(f"Error fetching seller acceptance API: {e}")
+        error("api.error", api="seller_acceptance", error=str(e))
         return None
 
 
@@ -186,7 +186,7 @@ def get_video_content_from_api(video_id):
         response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
         return response.json() if response.status_code == 200 else None
     except Exception as e:
-        print(f"Error fetching video content API: {e}")
+        error("api.error", api="video_content", error=str(e))
         return None
 
 
@@ -198,7 +198,7 @@ def get_currencies_from_api(culture="tr-TR", storefront_id=1):
         response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
         return response.json() if response.status_code == 200 else None
     except Exception as e:
-        print(f"Error fetching currencies API: {e}")
+        error("api.error", api="currencies", error=str(e))
         return None
 
 
@@ -210,7 +210,7 @@ def get_stickers_from_api(sticker_ids, platform="WEB"):
         response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
         return response.json() if response.status_code == 200 else None
     except Exception as e:
-        print(f"Error fetching stickers API: {e}")
+        error("api.error", api="stickers", error=str(e))
         return None
 
 
@@ -232,7 +232,7 @@ def get_complete_the_look_from_api(content_id, culture="tr-TR"):
         response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
         return response.json() if response.status_code == 200 else None
     except Exception as e:
-        print(f"Error fetching complete the look API: {e}")
+        error("api.error", api="complete_the_look", error=str(e))
         return None
 
 
@@ -244,7 +244,7 @@ def get_slicing_attributes_from_api(group_id, content_id):
         response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
         return response.json() if response.status_code == 200 else None
     except Exception as e:
-        print(f"Error fetching slicing attributes API: {e}")
+        error("api.error", api="slicing_attributes", error=str(e))
         return None
 
 
@@ -256,7 +256,7 @@ def get_social_proof_from_api(content_ids):
         response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
         return response.json() if response.status_code == 200 else None
     except Exception as e:
-        print(f"Error fetching social proof API: {e}")
+        error("api.error", api="social_proof", error=str(e))
         return None
 
 
@@ -268,7 +268,7 @@ def get_seller_store_from_api(seller_id):
         response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
         return response.json() if response.status_code == 200 else None
     except Exception as e:
-        print(f"Error fetching seller store API: {e}")
+        error("api.error", api="seller_store", error=str(e))
         return None
 
 
@@ -280,7 +280,7 @@ def get_seller_follower_from_api(seller_id, culture="tr-TR"):
         response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
         return response.json() if response.status_code == 200 else None
     except Exception as e:
-        print(f"Error fetching seller follower API: {e}")
+        error("api.error", api="seller_follower", error=str(e))
         return None
 
 
@@ -292,7 +292,7 @@ def get_stamps_from_api(tag_ids, platform="WEB"):
         response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
         return response.json() if response.status_code == 200 else None
     except Exception as e:
-        print(f"Error fetching stamps API: {e}")
+        error("api.error", api="stamps", error=str(e))
         return None
 
 
@@ -311,7 +311,7 @@ def get_product_eligibility_from_api(category_id, bank_category_id, price, cultu
         response = requests.get(url, params=params, headers=get_common_api_headers(), timeout=20)
         return response.json() if response.status_code == 200 else None
     except Exception as e:
-        print(f"Error fetching product eligibility API: {e}")
+        error("api.error", api="product_eligibility", error=str(e))
         return None
 
 def _flatten_vas_attributes(attributes):
@@ -502,6 +502,7 @@ def _detect_category_from_product_data(product_data):
 
 def _extract_shared_props(soup):
     if not isinstance(soup, BeautifulSoup):
+        debug("shared_props.skip", reason="no_soup")
         return None
 
     for script in soup.select("script"):
@@ -517,6 +518,7 @@ def _extract_shared_props(soup):
 
         brace = text.find("{", start)
         if brace == -1:
+            debug("shared_props.no_brace")
             continue
 
         depth = 0
@@ -543,11 +545,14 @@ def _extract_shared_props(soup):
 
         try:
             payload = json.loads(text[brace : i + 1])
-        except (TypeError, ValueError, json.JSONDecodeError):
+        except (TypeError, ValueError, json.JSONDecodeError) as exc:
+            debug("shared_props.parse_failed", error=str(exc))
             continue
         if isinstance(payload, dict):
+            debug("shared_props.ok", keys=list(payload.keys())[:5])
             return payload
 
+    debug("shared_props.not_found")
     return None
 
 
@@ -667,8 +672,10 @@ def _find_category_path_in_shared_props(node, depth=0):
 
 def _detect_custom_data(product_data, shared_props=None):
     custom = {}
+    debug("ty.custom_data.start")
 
     if not isinstance(product_data, dict):
+        debug("ty.custom_data.skip", reason="no_product_data")
         return custom
 
     pattern = _extract_first_string(product_data.get("pattern"))
@@ -721,6 +728,7 @@ def _detect_custom_data(product_data, shared_props=None):
         if path:
             custom["category_path"] = path
 
+    debug("ty.custom_data.done", keys=list(custom.keys()))
     return custom
 
 
@@ -822,6 +830,7 @@ def _extract_description_clean(product_data):
 
 def _build_description(product_data):
     if not isinstance(product_data, dict):
+        debug("ty.desc.skip", reason="no_product_data")
         return None
 
     sku = product_data.get("sku")
@@ -830,10 +839,12 @@ def _build_description(product_data):
         if api_description:
             cleaned_api = _strip_sentences_before_marker(api_description).strip()
             if cleaned_api and len(cleaned_api) > 10:
+                debug("ty.desc.ok", source="api", sku=sku)
                 return cleaned_api
 
     clean_description = _extract_description_clean(product_data)
     if clean_description and len(clean_description) > 10:
+        debug("ty.desc.ok", source="clean", sku=sku)
         return clean_description
 
     attributes = _extract_attributes_dict(product_data)
@@ -845,9 +856,12 @@ def _build_description(product_data):
             snippets.append(f"{key}: {value}")
         base = ". ".join(snippets)
         if name:
+            debug("ty.desc.ok", source="attributes_with_name", sku=sku)
             return f"{name}. Features: {base}."
+        debug("ty.desc.ok", source="attributes_only", sku=sku)
         return base
 
+    debug("ty.desc.ok", source="jsonld_fallback", sku=sku)
     return _extract_first_string(product_data.get("description"))
 
 

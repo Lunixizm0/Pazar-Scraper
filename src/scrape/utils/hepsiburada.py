@@ -199,6 +199,7 @@ def _build_description(soup, product_data):
     dom_description = (
         _strip_placeholder_tokens(dom_description) if dom_description else None
     )
+    debug("desc.dom", has_dom=dom_description is not None)
 
     name = _extract_first_string(product_data.get("name")) or ""
     if dom_description:
@@ -217,12 +218,16 @@ def _build_description(soup, product_data):
                 parts.append(json_ld_description)
         else:
             parts.append(json_ld_description)
+    debug("desc.json_ld", has_json_ld=json_ld_description is not None)
 
     if not parts:
         fallback = _extract_attribute_fallback_description(product_data)
         if fallback:
+            debug("desc.fallback", source="attributes")
             return fallback
+        debug("desc.none")
         return None
+    debug("desc.ok", source="dom" if len(parts) == 1 and parts[0] == dom_description else "combined")
     return " ".join(parts)
 
 
@@ -294,6 +299,7 @@ def _extract_availability(product_data, redux_product):
 
 def _extract_custom_data(product_data, redux_product):
     custom = {}
+    debug("custom_data.start")
 
     if isinstance(redux_product, dict):
         merchant = redux_product.get("merchantName")
@@ -353,6 +359,7 @@ def _extract_custom_data(product_data, redux_product):
             if review_data:
                 custom["reviews"] = review_data
 
+    debug("custom_data.done", keys=list(custom.keys()))
     return custom
 
 
@@ -387,12 +394,14 @@ def _api_headers(product_url=None, is_post=False):
 
 def _extract_product_ctx(soup, product_data):
     ctx = {}
+    debug("ctx.extract.start", sku=(product_data or {}).get("sku"))
 
     if isinstance(product_data, dict):
         ctx["sku"] = product_data.get("sku")
         offers = product_data.get("offers")
         if isinstance(offers, dict):
             ctx["url"] = offers.get("url")
+    debug("ctx.extract.from_product_data", sku=ctx.get("sku"), url=ctx.get("url"))
 
     if isinstance(soup, BeautifulSoup):
         script = soup.select_one("script#reduxStore")
@@ -401,6 +410,7 @@ def _extract_product_ctx(soup, product_data):
             try:
                 store = json.loads(text[text.find("{") : text.rfind("}") + 1])
             except (TypeError, ValueError, json.JSONDecodeError):
+                debug("ctx.extract.redux_parse_failed")
                 store = None
             if isinstance(store, dict):
                 product_state = store.get("productState")
@@ -462,6 +472,9 @@ def _extract_product_ctx(soup, product_data):
                                 if ids:
                                     ctx["root_category_list"] = ids
                                     ctx["root_buying_category_list"] = [ids[-1]]
+                        debug("ctx.extract.redux_ok", sku=ctx.get("sku"),
+                              definition_id=ctx.get("definition_id"),
+                              merchant_id=ctx.get("merchant_id"))
 
         # backfill from raw HTML regardless of redux presence
         html = str(soup)
@@ -494,12 +507,14 @@ def _extract_product_ctx(soup, product_data):
                     if ids:
                         ctx["root_category_list"] = ids
                         ctx["root_buying_category_list"] = [ids[-1]]
-        except Exception:
-            pass
+        except Exception as exc:
+            debug("ctx.extract.html_backfill_failed", error=str(exc))
 
     if ctx.get("sku") is None and isinstance(product_data, dict):
         ctx["sku"] = product_data.get("sku")
 
+    debug("ctx.extract.done", sku=ctx.get("sku"), definition_id=ctx.get("definition_id"),
+          merchant_id=ctx.get("merchant_id"), url=ctx.get("url"))
     return ctx
 
 
@@ -523,6 +538,7 @@ class _HepbAPIContext:
 
 
 def get_listings_from_api(sku, product_url=None):
+    debug("api.listings.start", sku=sku)
     ctx = _HepbAPIContext(product_data={"sku": sku}, product_url=product_url)
     url = f"https://www.hepsiburada.com/api/v1/product/listings/{sku}"
     resp = requests.get(url, headers=_api_headers(ctx.product_url), timeout=30)
@@ -540,6 +556,7 @@ def get_listings_from_api(sku, product_url=None):
             item.pop("pbs", None)
             filtered.append(item)
         listings = filtered
+    debug("api.listings.ok", sku=sku, count=len(listings) if isinstance(listings, list) else 0)
     return listings
 
 
@@ -552,6 +569,7 @@ def get_installment_from_api(
     is_fashion="false",
     product_url=None,
 ):
+    debug("api.installment.start", sku=sku)
     params = {
         "maxInstallment": 12,
         "amount": str(amount or 0),
@@ -570,6 +588,7 @@ def get_installment_from_api(
         timeout=30,
     )
     resp.raise_for_status()
+    debug("api.installment.ok", sku=sku)
     return resp.json()
 
 
@@ -611,6 +630,7 @@ def get_without_affordability_from_api(
     ctx_dict=None,
     **overrides,
 ):
+    debug("api.without_affordability.start", sku=sku)
     ctx = _HepbAPIContext(
         soup=soup,
         product_data={"sku": sku},
@@ -642,6 +662,7 @@ def get_without_affordability_from_api(
         timeout=30,
     )
     resp.raise_for_status()
+    debug("api.without_affordability.ok", sku=sku)
     return resp.json()
 
 
@@ -653,6 +674,7 @@ def get_vas_from_api(
     ctx_dict=None,
     **overrides,
 ):
+    debug("api.vas.start", sku=sku)
     ctx = _HepbAPIContext(
         soup=soup,
         product_data={"sku": sku},
@@ -693,6 +715,7 @@ def get_vas_from_api(
         timeout=30,
     )
     resp.raise_for_status()
+    debug("api.vas.ok", sku=sku)
     return resp.json()
 
 
@@ -703,6 +726,7 @@ def get_payment_options_from_api(
     definition_id=None,
     **overrides,
 ):
+    debug("api.payment_options.start", sku=sku)
     if anonymous_id is None:
         anonymous_id = str(uuid.uuid4())
     body = {
@@ -735,6 +759,7 @@ def get_payment_options_from_api(
         timeout=30,
     )
     resp.raise_for_status()
+    debug("api.payment_options.ok", sku=sku)
     return resp.json()
 
 
@@ -753,6 +778,7 @@ def get_other_merchants_from_api(
     ctx_dict=None,
     **overrides,
 ):
+    debug("api.other_merchants.start", sku=sku)
     ctx = _HepbAPIContext(
         soup=soup,
         product_data={"sku": sku},
@@ -784,6 +810,7 @@ def get_other_merchants_from_api(
         timeout=30,
     )
     resp.raise_for_status()
+    debug("api.other_merchants.ok", sku=sku)
     return resp.json()
 
 
@@ -795,6 +822,7 @@ def get_shipping_due_date_from_api(
     if anonymous_id is None:
         anonymous_id = str(uuid.uuid4())
     sku = ctx.ctx.get("sku")
+    debug("api.shipping_due_date.start", sku=sku)
     listing = ctx.ctx.get("_listing") or {}
     query_model = {
         "sku": sku,
@@ -837,10 +865,12 @@ def get_shipping_due_date_from_api(
         timeout=30,
     )
     resp.raise_for_status()
+    debug("api.shipping_due_date.ok", sku=sku)
     return resp.json()
 
 
 def get_ask_to_seller_from_api(sku, product_url=None):
+    debug("api.ask_to_seller.start", sku=sku)
     ctx = _HepbAPIContext(product_data={"sku": sku}, product_url=product_url)
     resp = requests.get(
         f"https://api-asktoseller.hepsiburada.com/api/v2.0/products/{sku}/merchants/accept-questions",
@@ -848,6 +878,7 @@ def get_ask_to_seller_from_api(sku, product_url=None):
         timeout=30,
     )
     resp.raise_for_status()
+    debug("api.ask_to_seller.ok", sku=sku)
     return resp.json()
 
 
