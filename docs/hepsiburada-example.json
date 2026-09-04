@@ -130,7 +130,7 @@
           "logo": "https://images.hepsiburada.net/assets/marketplace/b38d2d14-6ccf-4fc8-a543-c85dfab931f3-67626.png",
           "ratingSummary": {
             "lifetimeRating": 9.6,
-            "ratingQuantity": 426
+            "ratingQuantity": 423
           },
           "merchantCity": "İSTANBUL",
           "merchantCountry": "TÜRKİYE",
@@ -141,7 +141,7 @@
             "logo": "https://images.hepsiburada.net/assets/marketplace/b38d2d14-6ccf-4fc8-a543-c85dfab931f3-67626.png",
             "ratingSummary": {
               "lifetimeRating": 9.6,
-              "ratingQuantity": 426
+              "ratingQuantity": 423
             },
             "merchantLabels": null,
             "urlPostfix": "nethouse"
@@ -162,7 +162,7 @@
           ],
           "discountRate": 1,
           "warehouseId": "BIRINCIL",
-          "quantity": 357,
+          "quantity": 355,
           "buyboxOrder": 1,
           "tagList": [
             {
@@ -263,7 +263,7 @@
           "logo": "https://images.hepsiburada.net/assets/marketplace/ed81e61b-1bdc-4f7d-8bdf-73ecae0f7334-14523.png",
           "ratingSummary": {
             "lifetimeRating": 9.5,
-            "ratingQuantity": 51
+            "ratingQuantity": 50
           },
           "merchantCity": "İZMİR",
           "merchantCountry": "TÜRKİYE",
@@ -274,7 +274,7 @@
             "logo": "https://images.hepsiburada.net/assets/marketplace/ed81e61b-1bdc-4f7d-8bdf-73ecae0f7334-14523.png",
             "ratingSummary": {
               "lifetimeRating": 9.5,
-              "ratingQuantity": 51
+              "ratingQuantity": 50
             },
             "merchantLabels": null,
             "urlPostfix": "emc-bilisim-tekn"
@@ -289,7 +289,7 @@
           ],
           "discountRate": 0,
           "warehouseId": "BIRINCIL",
-          "quantity": 50,
+          "quantity": 49,
           "buyboxOrder": 2,
           "tagList": [
             {
@@ -398,7 +398,7 @@
           ],
           "discountRate": 0,
           "warehouseId": "BIRINCIL",
-          "quantity": 357,
+          "quantity": 355,
           "buyboxOrder": 3,
           "tagList": [
             {
@@ -591,16 +591,16 @@
         }
       ],
       "shipping": {
-        "due_date": "04.09.2026",
-        "due_text": "dakika içinde sipariş verirsen bugün kargoda",
-        "checkout_due_text": "Bugün Kargoda",
-        "shipment_time_text": "<b>15 saat 23dk</b> içinde sipariş verirsen bugün kargoda",
+        "due_date": "05.09.2026",
+        "due_text": "dakika içinde sipariş verirsen yarın kargoda",
+        "checkout_due_text": "Yarın Kargoda",
+        "shipment_time_text": "<b>22 saat 4dk</b> içinde sipariş verirsen yarın kargoda",
         "cargo_firm_id": 21,
         "cut_off_time": 16,
         "delivery_options": [
           {
-            "name": "Bugün kargoda",
-            "text": "<b>15 saat 23dk</b> içinde sipariş verirsen bugün kargoda",
+            "name": "Yarın kargoda",
+            "text": "<b>22 saat 4dk</b> içinde sipariş verirsen yarın kargoda",
             "type": "StandardDelivery",
             "cargo_firm_id": 21,
             "image_url": "https://images.hepsiburada.net/shipping/assets/cargo-logo/21.png"

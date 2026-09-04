@@ -3,8 +3,7 @@ from scrape.utils import trendyol
 
 def test_installment_plan_uses_trendyol_response_field_names(monkeypatch):
     monkeypatch.setattr(
-        trendyol,
-        "get_installment_from_api",
+        "scrape.utils.trendyol.api.get_installment_from_api",
         lambda *args: {
             "result": {
                 "installmentOffers": [

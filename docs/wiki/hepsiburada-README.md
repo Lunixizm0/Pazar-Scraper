@@ -23,6 +23,43 @@ POST endpoints additionally use these headers: `origin: https://www.hepsiburada.
 
 Most cookies come from the browser session; in particular, without `hbus_anonymousId` (the `userId` value used in request bodies) and the Akamai protection cookies, requests may return 403.
 
+## `hbus_anonymousId` - How It Works
+
+The `hbus_anonymousId` is a **UUID v4** generated client-side by Hepsiburada's tracking script (`hbus.min.js`). It is **not** set by the server - there is no `Set-Cookie` header for it in the initial page response.
+
+### Generation flow
+
+1. `hbus.min.js` loads on every Hepsiburada page.
+2. `setAnonymousId()` calls a UUID v4 generator (standard `uuid` library: `r[6]=15&r[6]|64, r[8]=63&r[8]|128`).
+3. The UUID is stored as a cookie: `hbus_anonymousId=<uuid>; path=/; domain=.hepsiburada.com; priority=High`.
+4. On subsequent page loads, the existing cookie is read - no new UUID is generated.
+
+### Usage in API calls
+
+The anonymous ID is passed in request bodies (not headers) across multiple endpoints:
+
+| Endpoint | Body field(s) |
+| --- | --- |
+| `withoutAffordability` | `userId` (via `_merge_product_meta`) |
+| `paymentOptions` | `userId` |
+| `otherMerchants` | `userId` (via `_merge_product_meta`) |
+| `shipping duedate` | `customerId`, `anonymousId` |
+
+### Can it be obtained via `requests`?
+
+**No need to obtain it** - you can generate your own. The server does **not** validate this ID; it is used purely for analytics/tracking. Any valid UUID v4 works:
+
+```python
+import uuid
+str(uuid.uuid4())  # e.g. "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+```
+
+The scraper generates a fresh UUID per `build_product_dataset()` call (one per product scrape), mimicking a new anonymous visitor session.
+
+### Why a new UUID per scrape?
+
+In a real browser, each incognito window / cleared-cookies visit gets a new `hbus_anonymousId`. Generating a fresh UUID per scrape session is the most realistic behavior and avoids any potential stale-session issues.
+
 ## Endpoint List
 
 | # | Endpoint | Method | Purpose | Parameters |
@@ -48,8 +85,10 @@ GET https://www.hepsiburada.com/api/v1/product/listings/HBCV0000EBN5K8
   -H "User-Agent: Mozilla/5.0 ... Firefox/152.0"
   -H "Accept: application/json, text/plain, */*"
   -H "Referer: https://www.hepsiburada.com/elart-riva-100-pamuk-cift-kisilik-pike-sari-p-HBCV0000EBN5K8"
-  -H "Cookie: hbus_anonymousId=d0965061-...; _abck=...; bm_sz=..."
+  -H "Cookie: hbus_anonymousId=<any-uuid-v4>; _abck=...; bm_sz=..."
 ```
+
+Note: `hbus_anonymousId` can be any valid UUID v4 - the server does not validate it.
 
 ## Test Product
 
