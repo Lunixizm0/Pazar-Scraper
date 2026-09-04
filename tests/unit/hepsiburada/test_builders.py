@@ -1,4 +1,4 @@
-"""Unit tests for Hepsiburada builder/helper functions — zero network."""
+#Unit tests for Hepsiburada builder/helper functions - zero network
 from __future__ import annotations
 
 from tests.helpers.hepsiburada_fixtures import (

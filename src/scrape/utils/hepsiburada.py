@@ -1,4 +1,5 @@
 import json
+import uuid
 
 import requests as _requests
 from bs4 import BeautifulSoup
@@ -355,7 +356,6 @@ def _extract_custom_data(product_data, redux_product):
     return custom
 
 
-DEFAULT_ANONYMOUS_ID = "d0965061-6de7-4275-9138-7bbe5f942d90" #i get ts from incognito. probably will expire. tryna fix it soon.
 _HEPB_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:152.0) Gecko/20100101 Firefox/152.0"
 
 
@@ -504,11 +504,11 @@ def _extract_product_ctx(soup, product_data):
 
 
 class _HepbAPIContext:
-    def __init__(self, soup=None, product_data=None, anonymous_id=DEFAULT_ANONYMOUS_ID, product_url=None):
+    def __init__(self, soup=None, product_data=None, anonymous_id=None, product_url=None):
         self.ctx = _extract_product_ctx(soup, product_data)
         self.soup = soup
         self.product_data = product_data or {}
-        self.anonymous_id = anonymous_id
+        self.anonymous_id = anonymous_id or str(uuid.uuid4())
         self.product_url = (
             product_url
             or self.ctx.get("url")
@@ -605,7 +605,7 @@ def get_without_affordability_from_api(
     sku,
     product_tags,
     product_url=None,
-    anonymous_id=DEFAULT_ANONYMOUS_ID,
+    anonymous_id=None,
     product_data=None,
     soup=None,
     ctx_dict=None,
@@ -699,10 +699,12 @@ def get_vas_from_api(
 def get_payment_options_from_api(
     sku,
     product_url=None,
-    anonymous_id=DEFAULT_ANONYMOUS_ID,
+    anonymous_id=None,
     definition_id=None,
     **overrides,
 ):
+    if anonymous_id is None:
+        anonymous_id = str(uuid.uuid4())
     body = {
         "userId": anonymous_id,
         "affordabilityRequest": {
@@ -740,7 +742,7 @@ def get_other_merchants_from_api(
     sku,
     product_tags,
     product_url=None,
-    anonymous_id=DEFAULT_ANONYMOUS_ID,
+    anonymous_id=None,
     merchant_id=None,
     merchant_name=None,
     listing_id=None,
@@ -788,8 +790,10 @@ def get_other_merchants_from_api(
 def get_shipping_due_date_from_api(
     ctx,
     product_url=None,
-    anonymous_id=DEFAULT_ANONYMOUS_ID,
+    anonymous_id=None,
 ):
+    if anonymous_id is None:
+        anonymous_id = str(uuid.uuid4())
     sku = ctx.ctx.get("sku")
     listing = ctx.ctx.get("_listing") or {}
     query_model = {

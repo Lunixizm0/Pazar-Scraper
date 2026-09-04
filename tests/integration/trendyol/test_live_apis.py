@@ -239,7 +239,7 @@ def test_real_vas_api_post_returns_data():
             or ((price_info.get("discountedPrice") or {}).get("value")) is not None
         )
         pytest.skip(
-            f"VAS API returned None — missing fields: "
+            f"VAS API returned None - missing fields: "
             f"category={product.get('category') is not None}, "
             f"brand={product.get('brand') is not None}, "
             f"seller={merchant.get('id') is not None}, "

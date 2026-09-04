@@ -143,7 +143,8 @@ Tests are split into **unit** (fixture-based, zero network) and **integration** 
 ### Unit Tests
 
 You need to create fixtures with tests/fixtures/capture_fixtures.py first to use unit tests.
-All unit tests use captured HTML/API fixtures - no internet required:
+All unit tests use captured HTML/API fixtures - no internet required
+Finishes within 10 seconds.
 
 ```bash
 uv run pytest                              # Runs unit tests only (default)
@@ -154,7 +155,8 @@ uv run pytest tests/unit/hepsiburada/      # Hepsiburada unit tests only
 
 ### Integration Tests
 
-Integration tests hit live product pages and APIs (require internet and change, break):
+Integration tests hit live product pages and APIs (require internet and change, break)
+Needs ~4 minutes for all integration tests. (Will fix soon)
 
 ```bash
 uv run pytest tests/integration/ -v --override-ini='addopts='              # All integration tests
