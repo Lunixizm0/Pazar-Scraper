@@ -1,6 +1,6 @@
-# Pazar Scraper - Turkish E-commerce Product Scraper
+# Storefront-Research - Turkish E-commerce Research
 
-A Python web scraper for extracting structured product data from Turkish e-commerce platforms currently **Trendyol** and **Hepsiburada**.
+My research about most popular turkish e-commerce platforms. Bundled with a Python web scraper for extracting structured product data from Turkish e-commerce platforms currently **Trendyol** and **Hepsiburada**.
 
 ## Overview
 
