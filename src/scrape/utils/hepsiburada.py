@@ -670,10 +670,15 @@ def get_vas_from_api(
         )
     )
     root_categories = _to_int_list(ctx.ctx.get("root_category_list"))
+    price = ctx.ctx.get("price")
+    if price is None and isinstance(product_data, dict):
+        offers = product_data.get("offers")
+        if isinstance(offers, dict):
+            price = offers.get("price")
     body = {
         "definationName": definition_name or "",
         "merchantName": ctx.ctx.get("merchant_name") or "",
-        "price": ctx.ctx.get("price"),
+        "price": price,
         "rootCategories": root_categories,
         "sku": sku,
     }

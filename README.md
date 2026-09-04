@@ -64,12 +64,36 @@ src/scrape/
     ├── trendyol.py      # Trendyol scraper
     └── hepsiburada.py   # Hepsiburada scraper
 tests/
-├── trendyol/
-│   ├── test_trendyol.py             # Live integration tests
-│   └── get_products.py              # Fetches URLs from Trendyol best-sellers API
-└── hepsiburada/
-    ├── test_hepsiburada.py          # Live integration tests
-    └── get_hepsiburada_products.py  # Fetches URLs from Hepsiburada homepage
+├── conftest.py              # Root conftest: markers, fixture helpers
+├── helpers/
+│   ├── _live_helpers.py     # Live URL fetchers for integration parametrization
+│   ├── trendyol_fixtures.py # Cached fixture loaders for Trendyol tests
+│   └── hepsiburada_fixtures.py # Cached fixture loaders for Hepsiburada tests
+├── fixtures/
+│   ├── capture_fixtures.py  # One-time script to capture live fixture data
+│   ├── trendyol/            # HTML, API responses, expected outputs
+│   └── hepsiburada/         # HTML, redux store, API responses, expected outputs
+├── unit/
+│   ├── trendyol/
+│   │   ├── test_parsing.py      # HTML parsing, product data, price extraction
+│   │   ├── test_shared_props.py # Shared props, category path, custom data
+│   │   ├── test_builders.py     # VAS flattening, reviews, listing entry
+│   │   ├── test_dataset.py      # ProductDataset JSON serialization
+│   │   └── test_helpers.py      # Helper functions (monkeypatched)
+│   ├── hepsiburada/
+│   │   ├── test_parsing.py      # HTML parsing, product data, price
+│   │   ├── test_redux.py        # Redux store extraction
+│   │   ├── test_builders.py     # VAS building, description, generic check
+│   │   └── test_product_ctx.py  # Product context, category, availability
+│   ├── test_cli_debug.py        # CLI debug/stdout/stderr behavior
+│   └── test_installments.py     # Trendyol installment plan field names
+└── integration/
+    ├── conftest.py              # Parametrized live URLs + session fixtures
+    ├── trendyol/
+    │   ├── test_live_scrape.py  # Parametrized live scrape tests
+    │   └── test_live_apis.py    # 18 live Trendyol API tests
+    └── hepsiburada/
+        └── test_live_scrape.py  # Parametrized live scrape tests
 docs/ # i know this is messy but i do this for basic github wiki integration (probably fix that later)
 ├── wiki/
 │   ├── Home.md                      # Wiki landing page (linked from GitHub Wiki)
@@ -110,22 +134,50 @@ docs/ # i know this is messy but i do this for basic github wiki integration (pr
 - Python 3.14
 - uv (package manager)
 - Dependencies: `requests`, `beautifulsoup4`, `lxml`
-- Dev: `pytest`, `ruff`, `urllib3`
+- Dev: `pytest`, `ruff`, `pyright`, `urllib3`
 
 ## Testing
 
-Tests are live integration tests that hit real product pages (require internet):
+Tests are split into **unit** (fixture-based, zero network) and **integration** (live, hits real APIs).
+
+### Unit Tests
+
+You need to create fixtures with tests/fixtures/capture_fixtures.py first to use unit tests.
+All unit tests use captured HTML/API fixtures - no internet required:
 
 ```bash
-uv run pytest                    # All tests
-uv run pytest tests/trendyol/    # Trendyol only
-uv run pytest tests/hepsiburada/ # Hepsiburada only
+uv run pytest                              # Runs unit tests only (default)
+uv run pytest tests/unit/ -v               # Explicit unit tests with verbose
+uv run pytest tests/unit/trendyol/         # Trendyol unit tests only
+uv run pytest tests/unit/hepsiburada/      # Hepsiburada unit tests only
 ```
+
+### Integration Tests
+
+Integration tests hit live product pages and APIs (require internet and change, break):
+
+```bash
+uv run pytest tests/integration/ -v --override-ini='addopts='              # All integration tests
+uv run pytest tests/integration/trendyol/ -v --override-ini='addopts='     # Trendyol live tests
+uv run pytest tests/integration/hepsiburada/ -v --override-ini='addopts='  # Hepsiburada live tests
+```
+
+### Fixture Capture
+
+To recapture fixtures (e.g. after API changes):
+
+```bash
+uv run python tests/fixtures/capture_fixtures.py
+```
+
+This fetches live data once and saves to `tests/fixtures/` for offline unit testing.
 
 ## Linting
 
 ```bash
-uv run ruff check src/ tests/
+uv run ruff check src/ tests/    # Linting
+uv run ruff format src/ tests/   # Formatting
+uv run pyright src/ tests/       # Type checking
 ```
 
 ## Discovered Storefront APIs

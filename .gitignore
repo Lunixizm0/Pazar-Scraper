@@ -6,6 +6,8 @@ dist/
 wheels/
 *.egg-info
 .playwright-mcp
+tests/fixtures/hepsiburada
+tests/fixtures/trendyol
 # Virtual environments
 .venv
 .pytest_cache
